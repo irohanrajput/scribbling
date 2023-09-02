@@ -1,0 +1,1 @@
+A Text Analyzer based on django that helps in modifying, editing the text.

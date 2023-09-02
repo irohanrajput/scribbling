@@ -1,40 +1,32 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 
-def index (request):
-    return  render(request, 'index.html')
 
-def removepunc(request):
-    #getting the text and the putting it in a variable
+def index(request):
+    return render(request, 'index.html')
+
+
+def analyze(request):
+    # getting the text and the putting it in a variable
+
     newtext = (request.GET.get('text', 'default'))
-    print (newtext)
-    return HttpResponse(
-        f'remove punc </br> <a href = "/">back to home</a> </br> This is the text that was entered: {newtext}'
-        )
+    removepunc = request.GET.get('removepunc', 'off')
 
-def capfirst(request):
-    return HttpResponse(
-        f'remove punc </br>'
-        f'<a href = "/">back to home</a>'
-        )
+    print(removepunc)  # true/false
+    print(newtext)
 
-def newlineremove(request):
-    return HttpResponse(
-        f'remove punc </br>'
-        f'<a href = "/">back to home</a>'
-        )
+    analyzed = ""
+    puncs = '''!"#$%&'()*+, -./:;<=>?@[\]^_`{|}~'''
 
-def spaceremove(request):
-    return HttpResponse(
-        f'remove punc </br>'
-        f'<a href = "/">back to home</a>'
-        )
+    if removepunc == 'on':
+        for char in newtext:
+            if char not in puncs:
+                analyzed += char
 
-def charcount(request):
-    return HttpResponse(
-        f'remove punc </br>'
-        f'<a href = "/">back to home</a>'
-        )
+        params = {'purpose': "is free from punctuation", 'analyzed_text': analyzed}
+        return render(request, 'analyze.html', params)
+    
+    elif removepunc == 'off':
+        return HttpResponse(f'Since You forgot to mark the checkbox, nothing changes <h1>{newtext}</h1>')
 
-
-
+    # we'll use a template instead of httpRespose

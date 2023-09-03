@@ -11,22 +11,45 @@ def analyze(request):
 
     newtext = (request.GET.get('text', 'default'))
     removepunc = request.GET.get('removepunc', 'off')
+    capitalise = request.GET.get('capitalise', 'off')
+    nlr = request.GET.get('newlineremover', 'off')
+
 
     print(removepunc)  # true/false
     print(newtext)
+    print (capitalise)
+    print (nlr)
 
-    analyzed = ""
-    puncs = '''!"#$%&'()*+, -./:;<=>?@[\]^_`{|}~'''
+    puncs = '''!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~'''
 
     if removepunc == 'on':
+        analyzed = ""
         for char in newtext:
             if char not in puncs:
                 analyzed += char
 
-        params = {'purpose': "is free from punctuation", 'analyzed_text': analyzed}
-        return render(request, 'analyze.html', params)
-    
-    elif removepunc == 'off':
-        return HttpResponse(f'Since You forgot to mark the checkbox, nothing changes <h1>{newtext}</h1>')
+    if nlr == 'on':
+        analyzed =""
+        for char in newtext:
+            if char != '\n':
+                analyzed += char
 
-    # we'll use a template instead of httpRespose
+    if capitalise == 'on':
+        analyzed = ""
+        for char in newtext:
+            if char in newtext:
+                analyzed += char.upper()
+
+
+        
+        
+    params = {'purpose': 'is analyzed and modified as per requested', 'analyzed_text': analyzed}
+    
+    return render(request, 'analyze.html', params)
+    
+
+
+
+     
+    
+    

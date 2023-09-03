@@ -7,10 +7,13 @@
 </head>
 <body>
     <h1>Welcome to the text analyzer, Enter your text below</h1>
+    <h2><marquee>Note: use one feature at a time, just for now </marquee> </h2>
     <form action='/analyze' method = 'get'>
         <textarea name = 'text' style="width: 763px; height: 278px;"></textarea>
         <div>
             <input type ="checkbox" name = "removepunc"> Remove Punctuations </br>
+            <input type ="checkbox" name = "capitalise"> Change to UPPERCASE </br>
+            <input type ="checkbox" name = "newlineremover"> Remove line </br>
             <button type="submit"> Analyze Now </button>
         </div>
     </form>

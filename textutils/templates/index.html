@@ -1,21 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TextUtils</title>
-</head>
-<body>
-    <h1>Welcome to the text analyzer, Enter your text below</h1>
-    <h2><marquee>Note: use one feature at a time, just for now </marquee> </h2>
-    <form action='/analyze' method = 'get'>
-        <textarea name = 'text' style="width: 763px; height: 278px;"></textarea>
-        <div>
-            <input type ="checkbox" name = "removepunc"> Remove Punctuations </br>
-            <input type ="checkbox" name = "capitalise"> Change to UPPERCASE </br>
-            <input type ="checkbox" name = "newlineremover"> Remove line </br>
-            <button type="submit"> Analyze Now </button>
+{% extends 'base.html' %} 
+{% block content %}    
+     <form class = "container" action='/analyze' method = 'get'>
+          <div class="form-group">
+            <label for="exampleFormControlTextarea1" class="form-label">Enter Your Text Here</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" style="height: 365px;" name = "text"></textarea>
+          </div>
+
+        <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="customswitch1", name = "removepunc">
+            <label class="form-check-label" for="customswitch1">Remove Punctuations</label>
         </div>
-    </form>
-</body>
-</html>
+
+        <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="customswitch2", name = "capitalise">
+            <label class="form-check-label" for="customswitch2">Change to UPPERCAS</label>
+        </div>
+
+        <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="customswitch3", name = "newlineremover">
+            <label class="form-check-label" for="customswitch3">Remove line</label>
+        </div>
+        <button type="submit" class = "mt-2 btn-dark"> Analyze Now </button>
+      </form>
+      {% endblock content %}
+
+
+    

@@ -1,2 +1,6 @@
 02/09/2023: learned about some request.GET.get and used it to get data for analyzing and working with it.
 03/09/2023: added new features, 'uppercase' and 'remove line', in the tool"
+09/09/2023: fixed issues using "join", 
+
+before: all features were not working properly when used simultaneously
+Now: fixed, they work like wossshhhhh

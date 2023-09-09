@@ -27,28 +27,37 @@ def analyze(request):
     print (nlr)
 
     puncs = '''!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~'''
+    analyzed = newtext  # Start with the original text
+
+
+    # if removepunc == 'on':
+    #     analyzed = ""
+    #     for char in newtext:
+    #         if char not in puncs:
+    #             analyzed += char
 
     if removepunc == 'on':
-        analyzed = ""
-        for char in newtext:
-            if char not in puncs:
-                analyzed += char
+        analyzed = ''.join(char for char in analyzed if char not in puncs)
+
+
+    # if nlr == 'on':
+    #     analyzed =""
+    #     for char in newtext:
+    #         if char != '\n':
+    #             analyzed += char
 
     if nlr == 'on':
-        analyzed =""
-        for char in newtext:
-            if char != '\n':
-                analyzed += char
+        analyzed = analyzed.replace('\n', '')
+
+    # if capitalise == 'on':
+    #     analyzed = ""
+    #     for char in newtext:
+    #         if char in newtext:
+    #             analyzed += char.upper()
 
     if capitalise == 'on':
-        analyzed = ""
-        for char in newtext:
-            if char in newtext:
-                analyzed += char.upper()
-
-
-        
-        
+        analyzed = analyzed.upper()
+    
     params = {'purpose': 'is analyzed and modified as per requested', 'analyzed_text': analyzed}
     
     return render(request, 'analyze.html', params)

@@ -17,14 +17,16 @@ def analyze(request):
 
     newtext = (request.GET.get('text', 'default'))
     removepunc = request.GET.get('removepunc', 'off')
-    capitalise = request.GET.get('capitalise', 'off')
+    upper = request.GET.get('uprcase', 'off')
     nlr = request.GET.get('newlineremover', 'off')
+    lower = request.GET.get('lwrcase', 'off')
 
 
-    print(removepunc)  # true/false
-    print(newtext)
-    print (capitalise)
-    print (nlr)
+    print (f'removepunc:{removepunc}') # true/false
+    print (f'Input Text:{newtext}')
+    print (f'upper:{upper}')
+    print (f'nlr:{nlr}')
+    print (f'lower:{lower}')
 
     puncs = '''!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~'''
     analyzed = newtext  # Start with the original text
@@ -38,25 +40,16 @@ def analyze(request):
 
     if removepunc == 'on':
         analyzed = ''.join(char for char in analyzed if char not in puncs)
+ 
+    if upper == 'on':
+        analyzed = analyzed.upper()
 
-
-    # if nlr == 'on':
-    #     analyzed =""
-    #     for char in newtext:
-    #         if char != '\n':
-    #             analyzed += char
+    if lower == 'on':
+        analyzed = analyzed.lower()
 
     if nlr == 'on':
-        analyzed = analyzed.replace('\n', '')
+        analyzed = analyzed.replace('\n','')
 
-    # if capitalise == 'on':
-    #     analyzed = ""
-    #     for char in newtext:
-    #         if char in newtext:
-    #             analyzed += char.upper()
-
-    if capitalise == 'on':
-        analyzed = analyzed.upper()
     
     params = {'purpose': 'is analyzed and modified as per requested', 'analyzed_text': analyzed}
     

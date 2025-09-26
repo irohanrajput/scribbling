@@ -51,8 +51,6 @@ const getWeatherInfo = async (city, country = "") => {
     try {
       const utcOffsetSeconds = response.utcOffsetSeconds();
 
-
-
       const current = response.current();
       const daily = response.daily();
 
@@ -68,45 +66,22 @@ const getWeatherInfo = async (city, country = "") => {
       }
 
       const weatherData = {
-        current: {
-          time: new Date((Number(current.time()) + utcOffsetSeconds) * 1000),
-          temperature: current.variables(0).value(),
-        },
-        daily: {
-          time: [
-            ...Array(
-              (Number(daily.timeEnd()) - Number(daily.time())) /
-                daily.interval()
-            ),
-          ].map(
-            (_, i) =>
-              new Date(
-                (Number(daily.time()) +
-                  i * daily.interval() +
-                  utcOffsetSeconds) *
-                  1000
-              )
-          ),
-          sunrise: [...Array(sunrise.valuesInt64Length())].map(
-            (_, i) =>
-              new Date(
-                (Number(sunrise.valuesInt64(i)) + utcOffsetSeconds) * 1000
-              )
-          ),
-          sunset: [...Array(sunset.valuesInt64Length())].map(
-            (_, i) =>
-              new Date(
-                (Number(sunset.valuesInt64(i)) + utcOffsetSeconds) * 1000
-              )
-          ),
-          temperature_max: daily.variables(2).valuesArray()[0],
-          temperature_min: daily.variables(3).valuesArray()[0],
-          precipitation_probability_max: daily.variables(4).valuesArray()[0],
-        },
+        current_time: new Date(
+          (Number(current.time()) + utcOffsetSeconds) * 1000
+        ),
+        current_temperature: current.variables(0).value(),
+        sunrise: [...Array(sunrise.valuesInt64Length())].map(
+          (_, i) =>
+            new Date((Number(sunrise.valuesInt64(i)) + utcOffsetSeconds) * 1000)
+        ),
+        sunset: [...Array(sunset.valuesInt64Length())].map(
+          (_, i) =>
+            new Date((Number(sunset.valuesInt64(i)) + utcOffsetSeconds) * 1000)
+        ),
+        temperature_max: daily.variables(2).valuesArray()[0],
+        temperature_min: daily.variables(3).valuesArray()[0],
+        precipitation_probability_max: daily.variables(4).valuesArray()[0],
       };
-
-
-      console.log(weatherData);
 
       return weatherData;
     } catch (error) {

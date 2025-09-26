@@ -1,7 +1,7 @@
 import * as dotenv from "dotenv";
 dotenv.config();
 
-const ninjaAPIkey = process.env.ninjaAPIkey;
+const ninjaAPIkey = process.env.NINJA_API_KEY;
 
 const getCoordinates = async (city, country = "") => {
   try {

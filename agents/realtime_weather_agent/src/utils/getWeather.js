@@ -67,6 +67,7 @@ const getWeatherInfo = async (city, country = "") => {
       }
 
       const weatherData = {
+        city: city,
         current_time: new Date(
           (Number(current.time()) + utcOffsetSeconds) * 1000
         ),

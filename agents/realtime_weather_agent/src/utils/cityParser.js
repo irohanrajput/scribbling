@@ -1,4 +1,4 @@
-import callGemini from "./queryAI.js";
+import queryAI from "./queryAI.js";
 
 const cityParser = async (userStory) => {
   // Build the prompt for Gemini
@@ -21,21 +21,21 @@ Output: []
 Now, extract city names from this input:
 "${userStory}"
 `;
-
-  const response = await callGemini(PROMPT);
-  let cleanResponse = response
-    .replace(/```json/g, "") // to remove opening ```json
-    .replace(/```/g, "") // to remove closing ```
-    .trim(); // to remove extra spaces/newlines
-
   try {
+    console.log("extracting cities..")
+    const response = await queryAI(PROMPT);
+    let cleanResponse = response
+      .replace(/```json/g, "") // to remove opening ```json
+      .replace(/```/g, "") // to remove closing ```
+      .trim(); // to remove extra spaces/newlines
+
     cleanResponse = JSON.parse(cleanResponse);
+    console.log("cities extracted successfully..")
     return cleanResponse;
   } catch (e) {
     console.error(`[cityParser] failed\nReason: ${e.message}`);
     return [];
   }
 };
-
 
 export default cityParser;

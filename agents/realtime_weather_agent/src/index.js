@@ -1,35 +1,27 @@
-
 import getWeatherInfo from "./utils/getWeather.js";
-import callGemini from "./utils/queryAI.js";
+import cityParser from "./utils/cityParser.js";
+import responseBuilder from "./utils/responseBuilder.js";
 
-const main = async (city) => {
+const main = async (userStory) => {
   try {
-    const weatherData = await getWeatherInfo(city);
-
-    const PROMPT = `Analyze the following weather data for ${city}:
-      Current time: ${weatherData.current_time}
-      Current temperature: ${weatherData.current_temperature}°C
-      Sunrise: ${weatherData.sunrise}
-      Sunset: ${weatherData.sunset}
-      Maximum temperature: ${weatherData.temperature_max}°C
-      Minimum temperature: ${weatherData.temperature_min}°C
-      Precipitation probability: ${weatherData.precipitation_probability_max}%
-      
-      Please provide a brief weather summary and recommendations for activities based on these conditions.`;
-
-    if (weatherData) {
-      console.log("formatting response..")
-      const response = await callGemini(PROMPT);
-      console.log(response);
-    } else {
-      throw Error("weather api is cool, can't call gemini but. ");
+    const cities = await cityParser(userStory);
+    for (const city of cities){
+      console.log(city)
     }
+
+    let weatherData = [];
+
+    for (const city of cities) {
+      weatherData.push(await getWeatherInfo(city));
+    }
+
+    const response = await responseBuilder(weatherData, userStory)
+    console.log(response)
+
   } catch (error) {
-    console.error(
-      `Failed to get weather information\n${error}`
-    );
+    console.error(`Failed to get weather information\n${error}`);
     process.exit(1);
   }
 };
 
-main("a");
+main("tell me something about delhi, bankok, muradabad, ghaziabad");

@@ -90,7 +90,7 @@ const getWeatherInfo = async (city, country = "") => {
       throw new Error(`Failed to process weather data: ${error.message}`);
     }
   } catch (err) {
-    throw new Error(`[getWeather] failed\nReason: ${err.message}`);
+    throw new Error(`[getWeather] failed with city ${city}\nReason: ${err.message}`);
   }
 };
 

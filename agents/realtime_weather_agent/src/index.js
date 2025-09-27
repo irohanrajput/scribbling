@@ -15,13 +15,24 @@ const main = async (userStory) => {
       weatherData.push(await getWeatherInfo(city));
     }
 
-    const response = await responseBuilder(weatherData, userStory)
-    console.log(response)
+    const response = await responseBuilder(weatherData)
+    console.log("\n🌈 Weather Results:", response)
+    return response;
 
   } catch (error) {
     console.error(`Failed to get weather information\n${error}`);
-    process.exit(1);
+    throw error;
   }
 };
 
-main("tell me something about delhi, bankok, muradabad, ghaziabad");
+
+const story = "what is wrong iwht thie delhi, adsf sadf singapur and also kasia gazibad"
+
+
+main(story)
+
+
+
+
+
+

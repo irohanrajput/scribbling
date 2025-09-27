@@ -25,21 +25,28 @@ User Input (Natural Language)
 ### Flow Diagram
 
 ```mermaid
-graph TD
-    A[User Story Input] --> B[City Parser Agent]
-    B --> C{Cities Extracted?}
-    C -->|Yes| D[Get Coordinates for Each City]
-    C -->|No| E[Return Empty Response]
-    D --> F[Fetch Real-time Weather Data]
-    F --> G[Collect All Weather Data]
-    G --> H[Response Builder Agent]
-    H --> I[Generate Contextual Summary]
-    I --> J[Final Weather Response]
+flowchart TD
+    %% === Tasks (AI/Agent) ===
+    A["User Story Input (Task)"] --> B["City Parser Agent (Task)"]
+    H["Response Builder Agent (Task)"] --> I["Generate Contextual Summary (Task)"]
 
-    B --> K[Gemini AI Model]
+    %% === Function/API Calls ===
+    B --> C{"Cities Extracted? (Decision)"}
+    C -- Yes --> D["Get Coordinates for Each City (Function/API)"]
+    D --> F["Fetch Real-time Weather Data (Function/API)"]
+    F --> G["Collect All Weather Data (Function/API)"]
+    G --> H
+    C -- No --> E["Return Empty Response (Function/API)"]
+
+    %% === AI Models ===
+    B --> K["Gemini AI Model"]
     K --> B
-    H --> L[Gemini AI Model]
+    H --> L["Gemini AI Model"]
     L --> H
+
+    %% === Final Output ===
+    I --> J["Final Weather Response (Task)"]
+
 ```
 
 ## Core Components

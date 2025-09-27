@@ -33,6 +33,7 @@ const getWeatherInfo = async (city, country = "") => {
     const url = "https://api.open-meteo.com/v1/forecast";
     let responses;
 
+    console.log(`coordinates found, now fetching the weather info for ${city}..`)
     try {
       responses = await fetchWeatherApi(url, params);
     } catch (error) {
@@ -87,9 +88,8 @@ const getWeatherInfo = async (city, country = "") => {
     } catch (error) {
       throw new Error(`Failed to process weather data: ${error.message}`);
     }
-  } catch (error) {
-    console.error("Error in getWeatherInfo:", error.message);
-    throw error;
+  } catch (err) {
+    throw new Error(`[getWeather] failed\nReason: ${err.message}`);
   }
 };
 

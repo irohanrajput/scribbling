@@ -22,7 +22,7 @@ Now, extract city names from this input:
 "${userStory}"
 `;
   try {
-    console.log("extracting cities..")
+    console.log("🤖 🔍 City Parser Agent: Extracting cities from user story...")
     const response = await queryAI(PROMPT);
     let cleanResponse = response
       .replace(/```json/g, "") // to remove opening ```json
@@ -30,7 +30,7 @@ Now, extract city names from this input:
       .trim(); // to remove extra spaces/newlines
 
     cleanResponse = JSON.parse(cleanResponse);
-    console.log("cities extracted successfully..")
+    console.log("✅ ✅ Cities extracted successfully!")
     return cleanResponse;
   } catch (e) {
     console.error(`[cityParser] failed\nReason: ${e.message}`);

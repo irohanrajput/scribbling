@@ -3,7 +3,7 @@ dotenv.config({ override: true, debug: false });
 const ninjaAPIkey = process.env.NINJA_API_KEY;
 
 const getCoordinates = async (city, country = "") => {
-  console.log(`fetching coordinates for ${city}... `)
+  console.log(`🌐 📍 External API: Fetching coordinates for ${city}...`);
   if (!ninjaAPIkey) {
     throw new Error(
       "ninjaAPIkey not found in environment variables. Please check your .env file"
@@ -46,7 +46,9 @@ const getCoordinates = async (city, country = "") => {
     if (typeof latitude !== "number" || typeof longitude !== "number") {
       throw new Error("Invalid coordinates received from API");
     }
-
+    console.log(
+      `🌐 ☁️  External API: Coordinates found! Fetching weather data for ${city}...`
+    );
     return { lat: latitude, long: longitude };
   } catch (err) {
     throw new Error(`[GetCoordinates] failed\nReason: ${err.message}`);

@@ -33,11 +33,10 @@ const getWeatherInfo = async (city, country = "") => {
     const url = "https://api.open-meteo.com/v1/forecast";
     let responses;
 
-    console.log(`coordinates found, now fetching the weather info for ${city}..`)
     try {
       responses = await fetchWeatherApi(url, params);
     } catch (error) {
-      throw new Error(`Failed to fetch weather data: ${error.message}`);
+      throw new Error(`Failed to fetch weather data from external API: ${error.message}`);
     }
 
     if (!responses || responses.length === 0) {

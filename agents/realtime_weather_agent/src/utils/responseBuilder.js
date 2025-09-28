@@ -8,7 +8,7 @@ Compare temperatures, weather conditions, and mention which city is warmest/cool
 
 
   try {
-    console.log("🔨 building reponse...")
+    console.log("🤖 🔨 Response Builder Agent: Building weather comparison response...")
     const response = await queryAI(PROMPT);
     return response;
   } catch (err) {

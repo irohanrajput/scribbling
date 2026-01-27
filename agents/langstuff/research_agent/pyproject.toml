@@ -1,0 +1,38 @@
+[tool.poetry]
+name = "research-agent"
+version = "1.0.0"
+description = "Research Agent with LangChain and LangGraph"
+authors = ["irohanrajput"]
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+# Core LangChain packages
+langchain = "^0.3.0"
+langchain-openai = "^0.2.0"
+langchain-groq = "^0.2.0"
+langchain-community = "^0.3.0"
+
+# LangGraph
+langgraph = "^0.2.0"
+
+# Observability with Langfuse (v2 for local server compatibility)
+langfuse = "^2.0.0,<3.0.0"
+
+# Web search
+duckduckgo-search = "^6.0.0"
+
+# Environment variables
+python-dotenv = "^1.0.0"
+
+# Type hints
+pydantic = "^2.0.0"
+
+# FastAPI server
+fastapi = "^0.109.0"
+uvicorn = {extras = ["standard"], version = "^0.27.0"}
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

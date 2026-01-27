@@ -20,9 +20,9 @@ from langchain_core.messages import HumanMessage, AIMessage, ToolMessage, System
 # Load environment variables
 load_dotenv()
 
-# Langfuse for observability
+# Langfuse for observability (v2 API)
 from langfuse import Langfuse
-from langfuse.langchain import CallbackHandler as LangfuseCallbackHandler
+from langfuse.callback import CallbackHandler as LangfuseCallbackHandler
 
 # Import agent creators
 from langchain_version.agent import create_langchain_agent, SYSTEM_PROMPT as LC_SYSTEM_PROMPT
@@ -49,7 +49,56 @@ app.add_middleware(
 langchain_llm = None
 langchain_tools = None
 langgraph_graph = None
-langfuse_handler = None
+
+# Langfuse settings (loaded at startup)
+langfuse_enabled = False
+langfuse_public_key = None
+langfuse_secret_key = None
+langfuse_host = None
+
+
+def get_langfuse_callback(session_id: str = None, user_id: str = None, metadata: dict = None, tags: list = None):
+    """
+    Get a Langfuse callback handler for tracing (v2 API - matches vm-api).
+    """
+    global langfuse_enabled, langfuse_public_key, langfuse_secret_key, langfuse_host
+
+    if not langfuse_enabled:
+        return None
+
+    try:
+        handler = LangfuseCallbackHandler(
+            public_key=langfuse_public_key,
+            secret_key=langfuse_secret_key,
+            host=langfuse_host,
+            session_id=session_id,
+            user_id=user_id,
+            metadata=metadata or {},
+            tags=tags or [],
+        )
+        return handler
+    except Exception as e:
+        print(f"Failed to create Langfuse handler: {e}")
+        return None
+
+
+def flush_langfuse():
+    """Flush pending Langfuse events."""
+    global langfuse_enabled, langfuse_public_key, langfuse_secret_key, langfuse_host
+
+    if not langfuse_enabled:
+        return
+
+    try:
+        langfuse = Langfuse(
+            public_key=langfuse_public_key,
+            secret_key=langfuse_secret_key,
+            host=langfuse_host,
+        )
+        langfuse.flush()
+        print("Langfuse events flushed")
+    except Exception as e:
+        print(f"Langfuse flush error: {e}")
 
 
 class QueryRequest(BaseModel):
@@ -77,29 +126,29 @@ class FlowResponse(BaseModel):
 @app.on_event("startup")
 async def startup_event():
     """Initialize agents on server startup."""
-    global langchain_llm, langchain_tools, langgraph_graph, langfuse_handler
+    global langchain_llm, langchain_tools, langgraph_graph
+    global langfuse_enabled, langfuse_public_key, langfuse_secret_key, langfuse_host
 
     print("Initializing agents...")
 
-    # Initialize Langfuse
-    try:
-        public_key = os.getenv("LANGFUSE_PUBLIC_KEY")
-        secret_key = os.getenv("LANGFUSE_SECRET_KEY")
-        host = os.getenv("LANGFUSE_HOST", "https://cloud.langfuse.com")
+    # Initialize Langfuse settings - set env vars for v3 auto-configuration
+    langfuse_public_key = os.getenv("LANGFUSE_PUBLIC_KEY")
+    langfuse_secret_key = os.getenv("LANGFUSE_SECRET_KEY")
+    langfuse_host = os.getenv("LANGFUSE_HOST", "http://localhost:3703")
 
-        if public_key and secret_key and not public_key.startswith("xxxx") and not public_key.startswith("your_"):
-            # Initialize Langfuse client first (reads secret from env)
-            os.environ["LANGFUSE_PUBLIC_KEY"] = public_key
-            os.environ["LANGFUSE_SECRET_KEY"] = secret_key
-            os.environ["LANGFUSE_HOST"] = host
-
-            langfuse_handler = LangfuseCallbackHandler()
-            print(f"Langfuse enabled -> {host}")
+    if langfuse_public_key and langfuse_secret_key:
+        if not langfuse_public_key.startswith("xxxx") and not langfuse_public_key.startswith("your_"):
+            # Set env vars for langfuse v3 auto-configuration
+            os.environ["LANGFUSE_PUBLIC_KEY"] = langfuse_public_key
+            os.environ["LANGFUSE_SECRET_KEY"] = langfuse_secret_key
+            os.environ["LANGFUSE_HOST"] = langfuse_host
+            langfuse_enabled = True
+            print(f"Langfuse enabled -> {langfuse_host}")
+            print(f"  Public key: {langfuse_public_key[:20]}...")
         else:
-            print("Langfuse not configured (set keys in .env)")
-    except Exception as e:
-        print(f"Langfuse init failed: {e}")
-        langfuse_handler = None
+            print("Langfuse keys are placeholders, tracing disabled")
+    else:
+        print("Langfuse not configured (set LANGFUSE_PUBLIC_KEY and LANGFUSE_SECRET_KEY in .env)")
 
     # Initialize LangChain agent
     langchain_llm, langchain_tools = create_langchain_agent()
@@ -115,13 +164,7 @@ async def startup_event():
 @app.on_event("shutdown")
 async def shutdown_event():
     """Flush Langfuse on shutdown."""
-    global langfuse_handler
-    if langfuse_handler:
-        try:
-            langfuse_handler.flush()
-            print("Langfuse traces flushed")
-        except Exception as e:
-            print(f"Langfuse flush error: {e}")
+    flush_langfuse()
 
 
 @app.get("/")
@@ -143,7 +186,7 @@ async def langchain_endpoint(request: QueryRequest):
     """
     Run a query using the LangChain agent with detailed flow tracking.
     """
-    global langchain_llm, langchain_tools, langfuse_handler
+    global langchain_llm, langchain_tools
 
     if langchain_llm is None or langchain_tools is None:
         raise HTTPException(status_code=503, detail="LangChain agent not initialized")
@@ -153,8 +196,13 @@ async def langchain_endpoint(request: QueryRequest):
     start_time = time.time()
     step_num = 1
 
-    # Langfuse callback config
-    config = {"callbacks": [langfuse_handler]} if langfuse_handler else {}
+    # Create Langfuse callback for tracing
+    langfuse_cb = get_langfuse_callback(
+        session_id=f"langchain-{int(time.time())}",
+        metadata={"agent_type": "langchain", "query": request.query[:100]},
+        tags=["research-agent", "langchain"],
+    )
+    config = {"callbacks": [langfuse_cb]} if langfuse_cb else {}
 
     # Step 1: User input
     steps.append(FlowStep(
@@ -238,6 +286,13 @@ async def langchain_endpoint(request: QueryRequest):
         if not final_response:
             final_response = messages[-1].content if messages else "No response generated"
 
+        # Flush Langfuse to ensure trace is sent
+        if langfuse_cb:
+            try:
+                langfuse_cb.flush()
+            except Exception:
+                pass
+
         return FlowResponse(
             query=request.query,
             response=final_response,
@@ -255,7 +310,7 @@ async def langgraph_endpoint(request: QueryRequest):
     """
     Run a query using the LangGraph agent with detailed flow tracking.
     """
-    global langgraph_graph, langfuse_handler
+    global langgraph_graph
 
     if langgraph_graph is None:
         raise HTTPException(status_code=503, detail="LangGraph agent not initialized")
@@ -281,11 +336,19 @@ async def langgraph_endpoint(request: QueryRequest):
             "iteration": 0,
         }
 
+        # Create Langfuse callback for tracing
+        thread_id = f"langgraph-{int(time.time())}"
+        langfuse_cb = get_langfuse_callback(
+            session_id=thread_id,
+            metadata={"agent_type": "langgraph", "query": request.query[:100]},
+            tags=["research-agent", "langgraph"],
+        )
+
         config = {
             "configurable": {
-                "thread_id": f"api-thread-{int(time.time())}",
+                "thread_id": thread_id,
             },
-            "callbacks": [langfuse_handler] if langfuse_handler else [],
+            "callbacks": [langfuse_cb] if langfuse_cb else [],
         }
 
         final_state = None
@@ -348,6 +411,13 @@ async def langgraph_endpoint(request: QueryRequest):
                     if not tool_calls:
                         response_text = msg.content
                         break
+
+        # Flush Langfuse to ensure trace is sent
+        if langfuse_cb:
+            try:
+                langfuse_cb.flush()
+            except Exception:
+                pass
 
         return FlowResponse(
             query=request.query,

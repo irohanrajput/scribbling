@@ -75,18 +75,18 @@ else
 fi
 echo ""
 
-# Step 3: Setup Python environment
+# Step 3: Setup Python environment with Poetry
 echo -e "${YELLOW}[3/4] Setting up Python environment...${NC}"
 
-if [ ! -d "venv" ]; then
-    echo -e "${YELLOW}  Creating virtual environment...${NC}"
-    python3 -m venv venv
+# Check if poetry is installed
+if ! command -v poetry &> /dev/null; then
+    echo -e "${RED}✗ Poetry not installed. Install with: curl -sSL https://install.python-poetry.org | python3 -${NC}"
+    exit 1
 fi
 
-source venv/bin/activate
-
-echo -e "${YELLOW}  Installing dependencies...${NC}"
-pip install -r requirements.txt
+# Install dependencies with Poetry
+echo -e "${YELLOW}  Installing dependencies with Poetry...${NC}"
+poetry install --no-interaction
 
 if [ $? -ne 0 ]; then
     echo -e "${RED}✗ Failed to install dependencies${NC}"
@@ -144,13 +144,28 @@ cleanup() {
 
 trap cleanup SIGINT SIGTERM
 
-# Start frontend in background
+# Start frontend in background and capture output to detect port
 echo -e "${YELLOW}Starting frontend...${NC}"
 cd frontend
-npm run dev > /dev/null 2>&1 &
+FRONTEND_LOG=$(mktemp)
+npm run dev > "$FRONTEND_LOG" 2>&1 &
 FRONTEND_PID=$!
 cd ..
-sleep 2
+
+# Wait for frontend to start and detect actual port
+FRONTEND_PORT=3000
+for i in {1..10}; do
+    sleep 1
+    # Check for port in Vite output
+    if grep -q "localhost:" "$FRONTEND_LOG" 2>/dev/null; then
+        DETECTED_PORT=$(grep -oP 'localhost:\K[0-9]+' "$FRONTEND_LOG" | head -1)
+        if [ -n "$DETECTED_PORT" ]; then
+            FRONTEND_PORT=$DETECTED_PORT
+            break
+        fi
+    fi
+done
+rm -f "$FRONTEND_LOG"
 
 # Print service summary
 echo ""
@@ -159,7 +174,7 @@ echo -e "${GREEN}        All services starting...${NC}"
 echo -e "${BLUE}==========================================${NC}"
 echo ""
 echo -e "${CYAN}Services available:${NC}"
-echo -e "  • Frontend:     ${GREEN}http://localhost:3000${NC}"
+echo -e "  • Frontend:     ${GREEN}http://localhost:${FRONTEND_PORT}${NC}"
 echo -e "  • Backend API:  ${GREEN}http://localhost:8000${NC}"
 echo -e "  • API Docs:     ${GREEN}http://localhost:8000/docs${NC}"
 echo -e "  • Langfuse:     ${GREEN}http://localhost:3703${NC} (from vm-api)"
@@ -171,5 +186,5 @@ echo -e "${CYAN}           FastAPI Server Logs${NC}"
 echo -e "${BLUE}==========================================${NC}"
 echo ""
 
-# Run backend in foreground
-uvicorn server:app --host 0.0.0.0 --port 8000 --reload
+# Run backend in foreground with Poetry
+poetry run uvicorn server:app --host 0.0.0.0 --port 8000 --reload

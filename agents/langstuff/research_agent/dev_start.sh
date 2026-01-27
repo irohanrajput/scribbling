@@ -10,6 +10,24 @@ echo "=========================================="
 echo "Research Agent - Development Server"
 echo "=========================================="
 
+# Function to kill process on a given port
+kill_port() {
+    local port=$1
+    local pid=$(lsof -ti:$port 2>/dev/null)
+    if [ -n "$pid" ]; then
+        echo "Killing process on port $port (PID: $pid)..."
+        kill -9 $pid 2>/dev/null || true
+        sleep 1
+    fi
+}
+
+# Kill any existing processes on required ports
+echo "Checking ports..."
+kill_port 8000
+kill_port 3000
+echo "Ports 8000 and 3000 are free"
+echo ""
+
 # Check if virtual environment exists
 if [ ! -d "venv" ]; then
     echo "Creating Python virtual environment..."
@@ -55,31 +73,27 @@ echo ""
 cleanup() {
     echo ""
     echo "Shutting down..."
-    kill $BACKEND_PID 2>/dev/null
     kill $FRONTEND_PID 2>/dev/null
     exit 0
 }
 
 trap cleanup SIGINT SIGTERM
 
-# Start backend in background
-echo "Starting backend..."
-uvicorn server:app --host 0.0.0.0 --port 8000 --reload &
-BACKEND_PID=$!
-
-# Wait for backend to be ready
-sleep 2
-
-# Start frontend in background
+# Start frontend in background (silent)
 echo "Starting frontend..."
 cd frontend
-npm run dev &
+npm run dev > /dev/null 2>&1 &
 FRONTEND_PID=$!
 cd ..
 
+# Wait a moment for frontend to start
+sleep 2
+echo "Frontend running at http://localhost:3000"
 echo ""
-echo "Both services running. Press Ctrl+C to stop."
+echo "=========================================="
+echo "FastAPI Server Logs (Ctrl+C to stop)"
+echo "=========================================="
 echo ""
 
-# Wait for both processes
-wait $BACKEND_PID $FRONTEND_PID
+# Run backend in foreground - all logs visible here
+uvicorn server:app --host 0.0.0.0 --port 8000 --reload

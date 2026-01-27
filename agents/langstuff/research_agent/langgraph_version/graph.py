@@ -57,7 +57,6 @@ from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 
 # LangGraph imports - THIS IS THE STAR!
 from langgraph.graph import StateGraph, END, START
-from langgraph.prebuilt import ToolNode
 from langgraph.checkpoint.memory import MemorySaver
 
 # Langfuse for observability (v3 API)
@@ -114,19 +113,24 @@ class AgentState(TypedDict):
 
 SYSTEM_PROMPT = """You are a Research Assistant AI that helps users find, analyze, and organize information.
 
-Your capabilities:
-1. WEB SEARCH - Search the internet for current information
-2. CALCULATOR - Perform mathematical calculations
-3. SAVE/GET NOTES - Store and retrieve important findings
-4. SUMMARIZER - Condense long text into key points
+AVAILABLE TOOLS:
+1. web_search - Search the internet for current information
+2. calculator - Perform mathematical calculations
+3. save_note - Store important findings for later
+4. get_notes - Retrieve saved notes
+5. summarizer - Condense text into key points
+6. get_current_time - Get current date/time
+7. word_count - Count words/characters in text
+8. analyze_text - Analyze text patterns
+9. compare_values - Compare two values
 
-Your approach:
-- Always be thorough and verify information when possible
-- Save important findings using the note-taking tool
-- Provide sources and explain your reasoning
-- If a calculation is needed, use the calculator - don't guess
+IMPORTANT: Use multiple tools to provide comprehensive answers!
+- First, search for information
+- Then, analyze or calculate as needed
+- Save key findings as notes
+- Finally, summarize your findings
 
-Be concise but thorough. Always cite your sources when using search results.
+Always use at least 2-3 tools when possible to demonstrate thorough research.
 When you have gathered enough information, provide a comprehensive final answer."""
 
 
@@ -213,6 +217,45 @@ def agent_node(state: AgentState) -> dict:
         "messages": [response],
         "iteration": state.get("iteration", 0) + 1,
     }
+
+
+def tool_executor_node(state: AgentState) -> dict:
+    """
+    Custom tool execution node with error handling.
+
+    This handles malformed tool calls gracefully instead of crashing.
+    """
+    messages = state["messages"]
+    last_message = messages[-1]
+
+    tool_calls = getattr(last_message, 'tool_calls', [])
+    if not tool_calls:
+        return {"messages": []}
+
+    # Get tools as dict
+    tools = {t.name: t for t in get_all_tools()}
+
+    tool_messages = []
+    for tc in tool_calls:
+        tool_name = tc.get("name", "unknown")
+        tool_args = tc.get("args", {})
+        tool_id = tc.get("id", "")
+
+        print(f"[TOOL EXEC] {tool_name} with args: {tool_args}")
+
+        try:
+            if tool_name in tools:
+                result = tools[tool_name].invoke(tool_args)
+            else:
+                result = f"Unknown tool: {tool_name}"
+        except Exception as e:
+            # Handle malformed tool calls gracefully
+            print(f"[TOOL ERROR] {tool_name}: {str(e)}")
+            result = f"Tool error: {str(e)}. Please try again with correct parameters."
+
+        tool_messages.append(ToolMessage(content=str(result), tool_call_id=tool_id))
+
+    return {"messages": tool_messages}
 
 
 def should_continue(state: AgentState) -> str:
@@ -310,13 +353,9 @@ def create_research_graph():
     # The agent node - calls the LLM
     workflow.add_node("agent", agent_node)
 
-    # The tool node - executes tool calls
-    # ToolNode is a prebuilt node that automatically:
-    # 1. Extracts tool calls from the last AI message
-    # 2. Executes each tool
-    # 3. Returns ToolMessages with results
-    tool_node = ToolNode(tools)
-    workflow.add_node("tools", tool_node)
+    # The tool node - executes tool calls with error handling
+    # Using custom node instead of prebuilt ToolNode for better error handling
+    workflow.add_node("tools", tool_executor_node)
 
     # =========================================================================
     # Add edges

@@ -73,6 +73,17 @@ function App() {
     return icons[type] || '?'
   }
 
+  // Remove markdown asterisks and clean up formatting
+  const cleanText = (text) => {
+    if (!text) return ''
+    return text
+      .replace(/\*\*\*/g, '')  // Remove ***
+      .replace(/\*\*/g, '')    // Remove **
+      .replace(/\*/g, '')      // Remove *
+      .replace(/#{1,6}\s/g, '') // Remove markdown headers
+      .trim()
+  }
+
   const renderFlow = (result, isLoading, agentType) => {
     if (isLoading) {
       return (
@@ -130,7 +141,7 @@ function App() {
                     </>
                   ) : step.step_type === 'final_answer' ? (
                     <div style={{ maxHeight: '200px', overflow: 'auto' }}>
-                      {step.content.substring(0, 500)}
+                      {cleanText(step.content).substring(0, 500)}
                       {step.content.length > 500 && '...'}
                     </div>
                   ) : (
@@ -144,7 +155,7 @@ function App() {
 
         <div className="final-response">
           <h3>Final Response</h3>
-          <p>{result.response}</p>
+          <p>{cleanText(result.response)}</p>
         </div>
       </>
     )

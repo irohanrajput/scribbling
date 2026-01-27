@@ -80,7 +80,7 @@ def create_langchain_agent():
     # STEP 1: Initialize the LLM
     # =========================================================================
     llm = ChatGroq(
-        model="meta-llama/llama-4-maverick-17b-128e-instruct",
+        model=os.getenv("GROQ_LLM_MODEL", "llama-3.3-70b-versatile"),
         temperature=0,
     )
 

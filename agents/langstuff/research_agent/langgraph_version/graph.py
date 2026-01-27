@@ -111,27 +111,24 @@ class AgentState(TypedDict):
 # Notice we DON'T need to describe the ReAct format here!
 # LangGraph handles tool calling natively using the model's built-in capability.
 
-SYSTEM_PROMPT = """You are a Research Assistant AI that helps users find, analyze, and organize information.
+SYSTEM_PROMPT = """You are a Research Assistant AI that helps users with information tasks.
 
 AVAILABLE TOOLS:
-1. web_search - Search the internet for current information
-2. calculator - Perform mathematical calculations
-3. save_note - Store important findings for later
-4. get_notes - Retrieve saved notes
-5. summarizer - Condense text into key points
-6. get_current_time - Get current date/time
-7. word_count - Count words/characters in text
-8. analyze_text - Analyze text patterns
-9. compare_values - Compare two values
+1. web_search - Search the web (USE ONLY ONCE per topic)
+2. calculator - Math calculations
+3. save_note - Store findings
+4. get_notes - Retrieve notes
+5. summarizer - Summarize text
+6. get_current_time - Current date/time
+7. word_count - Count words
+8. analyze_text - Text analysis
+9. compare_values - Compare values
 
-IMPORTANT: Use multiple tools to provide comprehensive answers!
-- First, search for information
-- Then, analyze or calculate as needed
-- Save key findings as notes
-- Finally, summarize your findings
-
-Always use at least 2-3 tools when possible to demonstrate thorough research.
-When you have gathered enough information, provide a comprehensive final answer."""
+RULES:
+- Use 2-4 DIFFERENT tools maximum per query
+- NEVER call the same tool twice
+- After using tools, IMMEDIATELY provide your final answer
+- Do not keep searching - one search is enough"""
 
 
 # =============================================================================
@@ -261,42 +258,22 @@ def tool_executor_node(state: AgentState) -> dict:
 def should_continue(state: AgentState) -> str:
     """
     CONDITIONAL EDGE - Decide where to go next.
-
-    This is a HUGE advantage of LangGraph!
-    You can route execution based on ANY condition:
-    - Did the LLM want to use a tool?
-    - Have we exceeded max iterations?
-    - Is human approval required?
-    - Any custom business logic!
-
-    Returns:
-    - "tools" -> Go to tool_node to execute the tool calls
-    - "end" -> We're done, end the graph
     """
+    max_iterations = int(os.getenv("MAX_ITERATIONS", "10000"))
+
+    # Check max iterations FIRST (prevent infinite loops)
+    if state.get("iteration", 0) >= max_iterations:
+        print(f"[ROUTER] Max iterations ({max_iterations}) reached -> ending")
+        return "end"
+
     messages = state["messages"]
     last_message = messages[-1]
 
     # Check if the LLM wants to call tools
-    # We use getattr to safely check for tool_calls (not all message types have it)
     tool_calls = getattr(last_message, 'tool_calls', None)
     if tool_calls:
         print(f"[ROUTER] Tool calls detected -> routing to 'tools'")
-
-        # EXAMPLE: Add custom logic here!
-        # You could check if a "dangerous" tool is being called
-        # and route to a "human_approval" node instead
-        #
-        # dangerous_tools = ["delete_file", "send_email"]
-        # for tc in last_message.tool_calls:
-        #     if tc["name"] in dangerous_tools:
-        #         return "human_approval"
-
         return "tools"
-
-    # Check max iterations (prevent infinite loops)
-    if state.get("iteration", 0) >= 10:
-        print("[ROUTER] Max iterations reached -> ending")
-        return "end"
 
     print("[ROUTER] No tool calls -> ending")
     return "end"

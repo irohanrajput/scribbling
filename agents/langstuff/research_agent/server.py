@@ -20,6 +20,10 @@ from langchain_core.messages import HumanMessage, AIMessage, ToolMessage, System
 # Load environment variables
 load_dotenv()
 
+# Langfuse for observability
+from langfuse import Langfuse
+from langfuse.langchain import CallbackHandler as LangfuseCallbackHandler
+
 # Import agent creators
 from langchain_version.agent import create_langchain_agent, SYSTEM_PROMPT as LC_SYSTEM_PROMPT
 from langgraph_version.graph import create_research_graph, SYSTEM_PROMPT as LG_SYSTEM_PROMPT, AgentState
@@ -45,6 +49,7 @@ app.add_middleware(
 langchain_llm = None
 langchain_tools = None
 langgraph_graph = None
+langfuse_handler = None
 
 
 class QueryRequest(BaseModel):
@@ -72,9 +77,29 @@ class FlowResponse(BaseModel):
 @app.on_event("startup")
 async def startup_event():
     """Initialize agents on server startup."""
-    global langchain_llm, langchain_tools, langgraph_graph
+    global langchain_llm, langchain_tools, langgraph_graph, langfuse_handler
 
     print("Initializing agents...")
+
+    # Initialize Langfuse
+    try:
+        public_key = os.getenv("LANGFUSE_PUBLIC_KEY")
+        secret_key = os.getenv("LANGFUSE_SECRET_KEY")
+        host = os.getenv("LANGFUSE_HOST", "https://cloud.langfuse.com")
+
+        if public_key and secret_key and not public_key.startswith("xxxx") and not public_key.startswith("your_"):
+            # Initialize Langfuse client first (reads secret from env)
+            os.environ["LANGFUSE_PUBLIC_KEY"] = public_key
+            os.environ["LANGFUSE_SECRET_KEY"] = secret_key
+            os.environ["LANGFUSE_HOST"] = host
+
+            langfuse_handler = LangfuseCallbackHandler()
+            print(f"Langfuse enabled -> {host}")
+        else:
+            print("Langfuse not configured (set keys in .env)")
+    except Exception as e:
+        print(f"Langfuse init failed: {e}")
+        langfuse_handler = None
 
     # Initialize LangChain agent
     langchain_llm, langchain_tools = create_langchain_agent()
@@ -85,6 +110,18 @@ async def startup_event():
     print("LangGraph agent ready")
 
     print("Server ready!")
+
+
+@app.on_event("shutdown")
+async def shutdown_event():
+    """Flush Langfuse on shutdown."""
+    global langfuse_handler
+    if langfuse_handler:
+        try:
+            langfuse_handler.flush()
+            print("Langfuse traces flushed")
+        except Exception as e:
+            print(f"Langfuse flush error: {e}")
 
 
 @app.get("/")
@@ -106,7 +143,7 @@ async def langchain_endpoint(request: QueryRequest):
     """
     Run a query using the LangChain agent with detailed flow tracking.
     """
-    global langchain_llm, langchain_tools
+    global langchain_llm, langchain_tools, langfuse_handler
 
     if langchain_llm is None or langchain_tools is None:
         raise HTTPException(status_code=503, detail="LangChain agent not initialized")
@@ -115,6 +152,9 @@ async def langchain_endpoint(request: QueryRequest):
     steps = []
     start_time = time.time()
     step_num = 1
+
+    # Langfuse callback config
+    config = {"callbacks": [langfuse_handler]} if langfuse_handler else {}
 
     # Step 1: User input
     steps.append(FlowStep(
@@ -135,7 +175,7 @@ async def langchain_endpoint(request: QueryRequest):
 
         for iteration in range(request.max_iterations):
             # LLM thinking
-            response = langchain_llm.invoke(messages)
+            response = langchain_llm.invoke(messages, config=config)
             messages.append(response)
 
             if hasattr(response, 'tool_calls') and response.tool_calls:
@@ -215,7 +255,7 @@ async def langgraph_endpoint(request: QueryRequest):
     """
     Run a query using the LangGraph agent with detailed flow tracking.
     """
-    global langgraph_graph
+    global langgraph_graph, langfuse_handler
 
     if langgraph_graph is None:
         raise HTTPException(status_code=503, detail="LangGraph agent not initialized")
@@ -244,7 +284,8 @@ async def langgraph_endpoint(request: QueryRequest):
         config = {
             "configurable": {
                 "thread_id": f"api-thread-{int(time.time())}",
-            }
+            },
+            "callbacks": [langfuse_handler] if langfuse_handler else [],
         }
 
         final_state = None

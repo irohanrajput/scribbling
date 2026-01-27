@@ -44,15 +44,15 @@ class TextAnalysisInput(BaseModel):
 
 @tool(args_schema=WebSearchInput)
 def web_search(query: str) -> str:
-    """Search the web for current information. Returns titles, snippets and URLs."""
+    """Search the web for current information. Returns titles, snippets and URLs. Only use ONCE per query - do not repeat searches."""
     try:
-        from duckduckgo_search import DDGS
+        from ddgs import DDGS
 
         with DDGS() as ddgs:
             results = list(ddgs.text(query, max_results=3))
 
         if not results:
-            return f"No results found for: {query}"
+            return f"No results found for: {query}. Do not search again - provide answer with available info."
 
         formatted = []
         for i, r in enumerate(results, 1):
@@ -63,12 +63,12 @@ def web_search(query: str) -> str:
                 f"  URL: {r.get('href', 'N/A')}"
             )
 
-        return "\n\n".join(formatted)
+        return "\n\n".join(formatted) + "\n\nIMPORTANT: You have search results. Proceed to next tool or provide final answer."
 
     except ImportError:
-        return f"[MOCK] Search results for '{query}': Install duckduckgo-search for real results."
+        return f"[MOCK] Search results for '{query}': Install ddgs package for real results."
     except Exception as e:
-        return f"Search error: {str(e)}"
+        return f"Search error: {str(e)}. Proceed with available information."
 
 
 # =============================================================================

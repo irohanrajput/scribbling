@@ -11,7 +11,7 @@ langgraph>=0.2.0
 langfuse>=2.0.0
 
 # For web search functionality
-duckduckgo-search>=6.0.0
+ddgs>=6.0.0
 
 # Environment variables
 python-dotenv>=1.0.0

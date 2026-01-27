@@ -32,8 +32,8 @@ from langchain_groq import ChatGroq
 from langchain_core.messages import HumanMessage, AIMessage, ToolMessage, SystemMessage
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 
-# Langfuse for observability (v3 API)
-from langfuse import Langfuse, observe
+# Langfuse for observability (v2 API)
+from langfuse import Langfuse
 
 # Our tools
 from tools.tools import get_all_tools, clear_notes

@@ -59,8 +59,8 @@ from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langgraph.graph import StateGraph, END, START
 from langgraph.checkpoint.memory import MemorySaver
 
-# Langfuse for observability (v3 API)
-from langfuse import Langfuse, observe
+# Langfuse for observability (v2 API)
+from langfuse import Langfuse
 
 # Our tools
 from tools.tools import get_all_tools, clear_notes

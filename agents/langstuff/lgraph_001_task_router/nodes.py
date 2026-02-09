@@ -78,6 +78,7 @@ def classify_task(state: RouterState) -> RouterState:
             "will_route_to": {"math": "math_node", "text": "text_node", "unclear": "clarify_node"}.get(response)
         }
     )
+    state["retries"] = state.get("retries", 0) +1
     return state
 
 

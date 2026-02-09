@@ -3,8 +3,10 @@ from langchain_groq import ChatGroq
 from langfuse.decorators import observe, langfuse_context
 
 
+MODEL_NAME = "openai/gpt-oss-120b"
+
 llm = ChatGroq(
-    model="openai/gpt-oss-120b",
+    model=MODEL_NAME,
     temperature=0
     )
 
@@ -13,6 +15,22 @@ class RouterState(TypedDict):
     user_input: str
     task_type: str
     result: str
+
+
+@observe(as_type="generation", name="llm_call")
+def call_llm(prompt: str) -> str:
+    response = llm.invoke(prompt)
+    langfuse_context.update_current_observation(
+        model=MODEL_NAME,
+        input=prompt,
+        output=response.content,
+        usage={
+            "input": response.response_metadata.get("token_usage", {}).get("prompt_tokens"),
+            "output": response.response_metadata.get("token_usage", {}).get("completion_tokens"),
+            "total": response.response_metadata.get("token_usage", {}).get("total_tokens"),
+        }
+    )
+    return response.content
 
 
 @observe(name="classify_task")
@@ -29,10 +47,10 @@ def classify_task(state: RouterState) -> RouterState:
     Respond with ONLY one word.
     """
 
-    response = llm.invoke(prompt).content.strip().lower()
+    response = call_llm(prompt).strip().lower()
 
     if response not in {"math", "text", "unclear"}:
-        response= "unclear"
+        response = "unclear"
 
     langfuse_context.update_current_observation(
         input=state["user_input"],
@@ -45,7 +63,7 @@ def classify_task(state: RouterState) -> RouterState:
 @observe(name="math_node")
 def math_node(state: RouterState) -> RouterState:
     prompt = f"solve this step by step: \n {state['user_input']}"
-    result = llm.invoke(prompt).content
+    result = call_llm(prompt)
     langfuse_context.update_current_observation(
         input=state["user_input"],
         output=result
@@ -56,7 +74,7 @@ def math_node(state: RouterState) -> RouterState:
 @observe(name="text_node")
 def text_node(state: RouterState) -> RouterState:
     prompt = f"explain this clearly and concisely: \n{state['user_input']}"
-    response = llm.invoke(prompt).content
+    response = call_llm(prompt)
     langfuse_context.update_current_observation(
         input=state["user_input"],
         output=response

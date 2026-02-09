@@ -54,7 +54,11 @@ def classify_task(state: RouterState) -> RouterState:
 
     langfuse_context.update_current_observation(
         input=state["user_input"],
-        output=response
+        output=response,
+        metadata={
+            "classified_as": response,
+            "will_route_to": {"math": "math_node", "text": "text_node", "unclear": "clarify_node"}.get(response)
+        }
     )
     state["task_type"] = response
     return state

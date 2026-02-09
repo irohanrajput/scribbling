@@ -15,6 +15,8 @@ class RouterState(TypedDict):
     user_input: str
     task_type: str
     result: str
+    confidence: float
+    retries: int
 
 
 @observe(as_type="generation", name="llm_call")

@@ -1,8 +1,6 @@
-from langfuse import Langfuse
 from typing import TypedDict
 from langchain_groq import ChatGroq
 
-langfuse = Langfuse()
 
 llm = ChatGroq(
     model="openai/gpt-oss-120b",
@@ -40,12 +38,12 @@ def classify_task(state: RouterState) -> RouterState:
 
 
 def math_node(state: RouterState) -> RouterState:
-    prompt = f"solve this step by step: \n{state["user_input"]}"
+    prompt = f"solve this step by step: \n {state['user_input']}"
     state["result"] = llm.invoke(prompt).content
     return state
 
 def text_node(state: RouterState) -> RouterState:
-    prompt = f"explain this clearly and concisely: \n{state["user_input"]}"
+    prompt = f"explain this clearly and concisely: \n{state['user_input']}"
     response = llm.invoke(prompt).content
     state["result"] = response
     return state

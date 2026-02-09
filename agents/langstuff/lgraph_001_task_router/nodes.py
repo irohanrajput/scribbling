@@ -42,17 +42,33 @@ def classify_task(state: RouterState) -> RouterState:
     - math
     - text
     - unclear
+    
+    also give the confidence score between 0 and 1.
+    
+    Format: 
+    <category>|<confidence>
 
     User request:
     {state['user_input']}
 
-    Respond with ONLY one word.
     """
 
     response = call_llm(prompt).strip().lower()
+    
+    try:
+        category, confidence = response.split("|") #unpacking from list
+        confidence = float(confidence)
+    except Exception:
+        category, confidence = "unclear", 0.0
+        
+    # except Exception as e:
+    #     raise e
 
-    if response not in {"math", "text", "unclear"}:
-        response = "unclear"
+    if category not in {"math", "text", "unclear"}:
+        category, confidence = "unclear", 0.0
+        
+    state["task_type"] = category
+    state["confidence"] = confidence
 
     langfuse_context.update_current_observation(
         input=state["user_input"],
@@ -62,7 +78,6 @@ def classify_task(state: RouterState) -> RouterState:
             "will_route_to": {"math": "math_node", "text": "text_node", "unclear": "clarify_node"}.get(response)
         }
     )
-    state["task_type"] = response
     return state
 
 

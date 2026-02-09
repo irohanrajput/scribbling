@@ -113,3 +113,8 @@ def clarify_node(state: RouterState) -> RouterState:
     state["result"] = "i need more details to help you. can you clarify ? "
     return state
 
+@observe(name="validate_classification")
+def validate_classification(state: RouterState) -> RouterState:
+    if state["confidence"] < 0.6:
+        state["task_type"] = "unclear"
+    return state

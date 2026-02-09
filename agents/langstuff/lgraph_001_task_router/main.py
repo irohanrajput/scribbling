@@ -18,5 +18,5 @@ def run_router(user_input: str):
     return result
 
 
-output = run_router("Explain Docker vs VM simply")
+output = run_router("teri maa ka bhosda")
 print(output["result"])

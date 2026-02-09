@@ -13,16 +13,6 @@ graph.add_node("validate", validate_classification)
 
 
 graph.set_entry_point("classifier")
-
-# conditional routing
-
-@observe(name="route_decision")
-def route(state: RouterState):
-    return state["task_type"]
-
-
-
-
 graph.add_edge("classifier", "validate")
 graph.add_edge("math", END)
 graph.add_edge("text", END)
@@ -34,12 +24,36 @@ def validation_route(state: RouterState):
     return "continue"
 
 
+def route_node(state: RouterState):
+    return state
+
+graph.add_node("router", route_node)
+    
+
+def route_decision(state:RouterState):
+    return state["task_type"]
+
 graph.add_conditional_edges(
     "validate",
     validation_route,
     {
         "retry": "classifier",
-        "continue": "route", #our existing router
+        "continue": "router", #our existing router
     }
 )
+
+graph.add_conditional_edges(
+    "router",
+    route_decision,
+    {
+        "math":"math",
+        "text": "text",
+        "unclear": "clarify"
+    }
+    
+    
+)
+
+
+
 

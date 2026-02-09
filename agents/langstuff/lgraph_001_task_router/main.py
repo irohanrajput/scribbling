@@ -2,25 +2,20 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from graph_builder import graph
-from langfuse import Langfuse
-
-langfuse = Langfuse()
+from langfuse.decorators import observe, langfuse_context
 
 app = graph.compile(interrupt_before=[])
 
 
+@observe(name="task-router")
 def run_router(user_input: str):
-    with langfuse.start_as_current_span(
-        name="task-router",
-        input=user_input
-    ) as span:
-        result = app.invoke({
-            "user_input": user_input,
-            "task_type": "",
-            "result": ""
-        })
-        span.update(output=result["result"])
-        return result
+    result = app.invoke({
+        "user_input": user_input,
+        "task_type": "",
+        "result": ""
+    })
+    langfuse_context.update_current_observation(output=result["result"])
+    return result
 
 
 output = run_router("Explain Docker vs VM simply")

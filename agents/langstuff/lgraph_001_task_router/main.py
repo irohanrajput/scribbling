@@ -49,3 +49,9 @@ def text_node(state: RouterState) -> RouterState:
     response = llm.invoke(prompt).content
     state["result"] = response
     return state
+
+
+def clarify_node(state: RouterState) -> RouterState:
+    state["result"] = "i need more details to help you. can you clarify ? "
+    return state
+

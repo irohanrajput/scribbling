@@ -70,16 +70,19 @@ def classify_task(state: RouterState) -> RouterState:
     state["task_type"] = category
     state["confidence"] = confidence
 
+    retries = state.get("retries", 0) + 1
+
     langfuse_context.update_current_observation(
         input=state["user_input"],
-        output=response,
+        output=f"{category}|{confidence}",
         metadata={
-            "classified_as": response,
-            "will_route_to": {"math": "math_node", "text": "text_node", "unclear": "clarify_node"}.get(response)
+            "step": "1_classify",
+            "classified_as": category,
+            "confidence": confidence,
+            "attempt": retries
         }
     )
-    state["retries"] = state.get("retries", 0) +1
-    return state
+    return {"task_type": category, "confidence": confidence, "retries": retries}
 
 
 @observe(name="math_node")
@@ -88,10 +91,10 @@ def math_node(state: RouterState) -> RouterState:
     result = call_llm(prompt)
     langfuse_context.update_current_observation(
         input=state["user_input"],
-        output=result
+        output=result,
+        metadata={"step": "4_execute", "handler": "math"}
     )
-    state["result"] = result
-    return state
+    return {"result": result}
 
 @observe(name="text_node")
 def text_node(state: RouterState) -> RouterState:
@@ -99,24 +102,36 @@ def text_node(state: RouterState) -> RouterState:
     response = call_llm(prompt)
     langfuse_context.update_current_observation(
         input=state["user_input"],
-        output=response
+        output=response,
+        metadata={"step": "4_execute", "handler": "text"}
     )
-    state["result"] = response
-    return state
+    return {"result": response}
 
 
 @observe(name="clarify_node")
 def clarify_node(state: RouterState) -> RouterState:
-
-    state["result"] = "i need more details to help you. can you clarify ? "
+    msg = "i need more details to help you. can you clarify ? "
     langfuse_context.update_current_observation(
-    input=state["user_input"],
-    output=state["result"]
-)
-    return state
+        input=state["user_input"],
+        output=msg,
+        metadata={"step": "4_execute", "handler": "clarify"}
+    )
+    return {"result": msg}
 
-@observe(name="validate_classification_node")
+@observe(name="validate_classification")
 def validate_classification(state: RouterState) -> RouterState:
-    if state["confidence"] < 0.6:
-        state["task_type"] = "unclear"
-    return state
+    original_type = state["task_type"]
+    confidence = state["confidence"]
+
+    final_type = "unclear" if confidence < 0.6 else original_type
+
+    langfuse_context.update_current_observation(
+        input={"task_type": original_type, "confidence": confidence},
+        output={"task_type": final_type},
+        metadata={
+            "step": "2_validate",
+            "confidence_threshold": 0.6,
+            "retries": state.get("retries", 0)
+        }
+    )
+    return {"task_type": final_type}

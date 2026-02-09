@@ -37,3 +37,15 @@ def classify_task(state: RouterState) -> RouterState:
         
     state["task_type"] = response
     return state
+
+
+def math_node(state: RouterState) -> RouterState:
+    prompt = f"solve this step by step: \n{state["user_input"]}"
+    state["result"] = llm.invoke(prompt).content
+    return state
+
+def text_node(state: RouterState) -> RouterState:
+    prompt = f"explain this clearly and concisely: \n{state["user_input"]}"
+    response = llm.invoke(prompt).content
+    state["result"] = response
+    return state

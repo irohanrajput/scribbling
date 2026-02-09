@@ -107,14 +107,15 @@ def text_node(state: RouterState) -> RouterState:
 
 @observe(name="clarify_node")
 def clarify_node(state: RouterState) -> RouterState:
-    langfuse_context.update_current_observation(
-        input=state["user_input"],
-        output="i need more details to help you. can you clarify ? "
-    )
+
     state["result"] = "i need more details to help you. can you clarify ? "
+    langfuse_context.update_current_observation(
+    input=state["user_input"],
+    output=state["result"]
+)
     return state
 
-@observe(name="validate_classification")
+@observe(name="validate_classification_node")
 def validate_classification(state: RouterState) -> RouterState:
     if state["confidence"] < 0.6:
         state["task_type"] = "unclear"

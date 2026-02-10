@@ -3,7 +3,7 @@ services:
   langfuse-db:
     image: postgres:15-alpine
     ports:
-      - "5433:5432"
+      - "4318:5432"
     environment:
       POSTGRES_USER: langfuse
       POSTGRES_PASSWORD: langfuse
@@ -42,19 +42,6 @@ services:
     networks:
       - app-network
 
-  # Task Router App
-  app:
-    build: .
-    env_file:
-      - .env
-    environment:
-      # Override LANGFUSE_HOST to use internal docker network
-      LANGFUSE_HOST: http://langfuse:3000
-    depends_on:
-      langfuse:
-        condition: service_healthy
-    networks:
-      - app-network
 
 volumes:
   langfuse_db_data:

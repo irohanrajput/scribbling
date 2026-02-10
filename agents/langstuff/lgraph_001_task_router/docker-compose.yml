@@ -3,7 +3,7 @@ services:
   langfuse-db:
     image: postgres:15-alpine
     ports:
-      - "4318:5432"
+      - "54320:5432"
     environment:
       POSTGRES_USER: langfuse
       POSTGRES_PASSWORD: langfuse
@@ -16,18 +16,18 @@ services:
       timeout: 3s
       retries: 10
     networks:
-      - app-network
+      - langfuse-network
 
   # Langfuse (LLM Observability - local instance)
   langfuse:
     image: langfuse/langfuse:2
     ports:
-      - "3703:3000"
+      - "3704:3000"
     environment:
       DATABASE_URL: postgresql://langfuse:langfuse@langfuse-db:5432/langfuse
       NEXTAUTH_SECRET: local-dev-secret-change-in-production
       SALT: local-dev-salt-change-in-production
-      NEXTAUTH_URL: http://localhost:3703
+      NEXTAUTH_URL: http://localhost:3704
       TELEMETRY_ENABLED: "false"
       LANGFUSE_ENABLE_EXPERIMENTAL_FEATURES: "false"
     depends_on:
@@ -40,12 +40,12 @@ services:
       retries: 15
       start_period: 30s
     networks:
-      - app-network
+      - langfuse-network
 
 
 volumes:
   langfuse_db_data:
 
 networks:
-  app-network:
+  langfuse-network:
     driver: bridge

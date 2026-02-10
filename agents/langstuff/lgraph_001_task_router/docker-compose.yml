@@ -1,0 +1,64 @@
+services:
+  # Langfuse Database (separate Postgres for Langfuse)
+  langfuse-db:
+    image: postgres:15-alpine
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_USER: langfuse
+      POSTGRES_PASSWORD: langfuse
+      POSTGRES_DB: langfuse
+    volumes:
+      - langfuse_db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U langfuse -d langfuse"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    networks:
+      - app-network
+
+  # Langfuse (LLM Observability - local instance)
+  langfuse:
+    image: langfuse/langfuse:2
+    ports:
+      - "3703:3000"
+    environment:
+      DATABASE_URL: postgresql://langfuse:langfuse@langfuse-db:5432/langfuse
+      NEXTAUTH_SECRET: local-dev-secret-change-in-production
+      SALT: local-dev-salt-change-in-production
+      NEXTAUTH_URL: http://localhost:3703
+      TELEMETRY_ENABLED: "false"
+      LANGFUSE_ENABLE_EXPERIMENTAL_FEATURES: "false"
+    depends_on:
+      langfuse-db:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "wget --spider -q http://localhost:3000/api/public/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 15
+      start_period: 30s
+    networks:
+      - app-network
+
+  # Task Router App
+  app:
+    build: .
+    env_file:
+      - .env
+    environment:
+      # Override LANGFUSE_HOST to use internal docker network
+      LANGFUSE_HOST: http://langfuse:3000
+    depends_on:
+      langfuse:
+        condition: service_healthy
+    networks:
+      - app-network
+
+volumes:
+  langfuse_db_data:
+
+networks:
+  app-network:
+    driver: bridge

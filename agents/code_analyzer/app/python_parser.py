@@ -33,7 +33,7 @@ class FunctionAnalyzer(ast.NodeVisitor):
         self.generic_visit(node)
 
 
-def parse_python_file(file_path: str) -> EachFile:
+def parse_python_file(file_path: str) -> FileSchema:
     with open(file_path, "r") as f:
         tree = ast.parse(f.read())
 

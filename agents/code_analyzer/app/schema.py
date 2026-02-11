@@ -8,7 +8,7 @@ class FunctionSchema(BaseModel):
     has_try_except: bool
     calls_external_io: bool
 
-class EachFile(BaseModel):
+class FileSchema(BaseModel):
     file_name:str
     functions: list[FunctionSchema]
 

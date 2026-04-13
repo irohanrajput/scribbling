@@ -1,4 +1,4 @@
-# RAG (Retrieval-Augmented Generation) — A Complete Beginner's Guide
+# RAG, Embeddings, Vectors, Semantics
 
 This document explains how a RAG system works, using a "Perplexity Lite" project as a running example. The project searches the web, stores scraped content in a vector database, and generates answers grounded in that context.
 

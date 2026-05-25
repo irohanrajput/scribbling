@@ -1,3 +1,4 @@
+.virtual*
 # Python
 __pycache__/
 *.py[cod]

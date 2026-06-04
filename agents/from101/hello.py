@@ -24,3 +24,4 @@ app = graph.compile()
 result = app.invoke({"message":"rohan"})
 
 print(result)
+print(state)

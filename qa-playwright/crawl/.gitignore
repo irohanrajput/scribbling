@@ -1,0 +1,20 @@
+# secrets
+.env
+
+# cached auth sessions
+session_*.json
+
+# generated reports
+report.json
+report.md
+
+# run logs
+*.log
+
+# python
+__pycache__/
+*.pyc
+.venv/
+
+# os
+.DS_Store

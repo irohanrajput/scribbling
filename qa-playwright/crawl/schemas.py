@@ -82,3 +82,10 @@ class TestCase(BaseModel):
 
 class TestCaseSet(BaseModel):
     cases: list[TestCase] = Field(default_factory=list)
+
+
+# ---------- Selector disambiguation (AI tiebreaker) ----------
+
+class Disambiguation(BaseModel):
+    reasoning: str = Field(description="Why this candidate, in one sentence.")
+    index: int = Field(description="Index of the chosen candidate element.")

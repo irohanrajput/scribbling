@@ -15,7 +15,7 @@ import os
 from google import genai
 from google.genai import types
 
-from schemas import LoginAction, PageAnalysis, TestCaseSet, Actionable
+from schemas import LoginAction, PageAnalysis, TestCaseSet, Actionable, Disambiguation
 from logs import get, preview, pretty, block
 
 log = get("ai")
@@ -92,6 +92,24 @@ class AIClient:
         hist = "\n".join(f"- {h}" for h in history) or "(nothing yet)"
         prompt = f"History of actions so far:\n{hist}\n\nCURRENT DOM:\n{_trim(dom)}"
         return self._generate("login-action", system, prompt, LoginAction)
+
+    def disambiguate(self, selector: str, candidates: list[tuple[int, str]], intent: str) -> int:
+        """Tiebreaker: a selector matched several elements and the keyword bank
+        couldn't pick. Given each candidate's surrounding text, choose the one
+        belonging to the `intent` (e.g. login) region. Returns an index."""
+        system = (
+            f"A CSS selector matched multiple elements while we were trying to "
+            f"perform a '{intent}' action. Each candidate is described by the "
+            f"visible text of its surrounding form. Choose the index of the "
+            f"element that belongs to the {intent.upper()} flow (NOT signup or "
+            f"any other form). Return that index."
+        )
+        listing = "\n".join(
+            f"[{i}] surrounding text: {ctx}" for i, ctx in candidates
+        )
+        prompt = f"Selector: {selector!r}\nGoal: {intent.upper()}\n\nCandidates:\n{listing}"
+        result = self._generate("disambiguate", system, prompt, Disambiguation)
+        return result.index
 
     # ---------- 2. Page analysis ----------
 

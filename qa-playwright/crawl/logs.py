@@ -40,6 +40,10 @@ def setup() -> None:
     fh.setFormatter(_FMT)
     root.addHandler(fh)
 
+    # silence noisy third-party transport logs so run.log stays our trace
+    for noisy in ("httpcore", "httpx", "urllib3", "google_genai", "google"):
+        logging.getLogger(noisy).setLevel(logging.WARNING)
+
     logging.getLogger("logs").info(
         "logging -> terminal (%s, previews) + %s (DEBUG, full)",
         term.level and logging.getLevelName(term.level) or "INFO", LOG_FILE,
@@ -66,3 +70,11 @@ def pretty(obj) -> str:
         return json.dumps(obj, indent=2, ensure_ascii=False)
     except Exception:
         return str(obj)
+
+
+def block(logger: logging.Logger, label: str, content: str) -> None:
+    """Log a big blob: a preview line (terminal + file) and the full content
+    (file only, via DEBUG)."""
+    content = content or ""
+    logger.info("%s (%d chars, preview):\n%s", label, len(content), preview(content))
+    logger.debug("%s (FULL):\n%s", label, content)

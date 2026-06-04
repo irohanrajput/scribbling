@@ -13,9 +13,95 @@ import os
 
 from schemas import LoginAction
 from disambiguate import resolve_unique
-from logs import get
+from logs import get, block
 
 log = get("browser")
+
+
+# Settle knobs
+_MIN_WAIT_MS = 1000    # floor: give JS time to fire its initial data fetch
+_QUIET_MS = 600        # DOM must be mutation-free this long to count as quiet
+_POLL_MS = 200
+_MAX_WAIT_MS = 15000   # hard cap so a never-quiet page can't hang us
+_NET_TYPES = ("xhr", "fetch")  # only these count; ignore ws/eventsource/img/etc.
+
+# Installs a MutationObserver (idempotent, re-installs after a full navigation
+# wiped it) and returns ms since the last DOM mutation.
+_DOM_QUIET_JS = """
+() => {
+  if (!window.__qaObserver) {
+    window.__qaLastMutation = Date.now();
+    window.__qaObserver = new MutationObserver(() => { window.__qaLastMutation = Date.now(); });
+    window.__qaObserver.observe(document.documentElement,
+      { childList: true, subtree: true, attributes: true, characterData: true });
+  }
+  return Date.now() - window.__qaLastMutation;
+}
+"""
+
+
+def wait_for_settled(page) -> None:
+    """Wait until the page is genuinely done loading, generically:
+
+      settled = (no xhr/fetch requests in flight) AND (DOM mutation-quiet)
+
+    Why both: a loading skeleton is static HTML (DOM-quiet) while its data
+    fetch is still pending (network-busy) - so requiring BOTH waits past the
+    skeleton until the real content fetch returns and renders. No site-specific
+    markup/text. Floor avoids snapshotting before JS even fires its fetch; cap
+    means a never-quiet page just proceeds with what it has."""
+    inflight = {"n": 0}
+
+    def _on_request(req):
+        if req.resource_type in _NET_TYPES:
+            inflight["n"] += 1
+
+    def _on_done(req):
+        if req.resource_type in _NET_TYPES:
+            inflight["n"] = max(0, inflight["n"] - 1)
+
+    page.on("request", _on_request)
+    page.on("requestfinished", _on_done)
+    page.on("requestfailed", _on_done)
+
+    waited = 0
+    try:
+        while waited < _MAX_WAIT_MS:
+            try:  # also (re)installs the observer, incl. after a redirect
+                since_mut = page.evaluate(_DOM_QUIET_JS)
+            except Exception:
+                since_mut = 0  # mid-navigation: treat as just-changed, keep waiting
+            net_idle = inflight["n"] == 0
+            dom_quiet = since_mut >= _QUIET_MS
+            log.debug("  settle: inflight_xhr=%d net_idle=%s dom_idle=%sms (need>=%d) waited=%dms",
+                      inflight["n"], net_idle, since_mut, _QUIET_MS, waited)
+            if waited >= _MIN_WAIT_MS and net_idle and dom_quiet:
+                log.info("  page settled (no xhr/fetch in-flight + DOM quiet %dms) after %dms",
+                         _QUIET_MS, waited)
+                return
+            page.wait_for_timeout(_POLL_MS)
+            waited += _POLL_MS
+        log.info("  settle cap reached (%dms), proceeding (inflight_xhr=%d)",
+                 _MAX_WAIT_MS, inflight["n"])
+    finally:
+        page.remove_listener("request", _on_request)
+        page.remove_listener("requestfinished", _on_done)
+        page.remove_listener("requestfailed", _on_done)
+
+
+def load_page(page, url: str) -> str:
+    """Navigate and return the fully-rendered DOM (after the settle wait)."""
+    log.info("navigating to %s", url)
+    page.goto(url, wait_until="domcontentloaded")
+    wait_for_settled(page)
+    try:  # nudge lazy/infinite-scroll content, then let it settle again
+        page.evaluate("() => window.scrollTo(0, document.body.scrollHeight)")
+        wait_for_settled(page)
+    except Exception:
+        pass
+    dom = page.content()
+    block(log, "captured DOM", dom)  # full DOM -> file, preview -> terminal
+    return dom
 
 
 def has_cache(path: str) -> bool:

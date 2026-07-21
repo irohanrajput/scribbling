@@ -88,5 +88,9 @@ def triage_prompt() -> str:
     return "review all open incidents and suggest which one to fix first, and why."
 
 
+def main():
+    mcp.run()
+
+
 if __name__ == "__main__":
     mcp.run()

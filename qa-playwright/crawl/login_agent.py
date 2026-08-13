@@ -10,16 +10,20 @@ sees a different DOM on each pass.
 Phase 1: one attempt, no retries. If we run out of steps, login failed.
 """
 from ai import AIClient
-from browser import do_login_action
+from browser import do_login_action, wait_for_settled
 from logs import get
 
 log = get("login")
 
 
-def run_login(page, ai: AIClient, login_url: str, credentials: dict,
+def run_login(page, ai: AIClient, credentials: dict, login_url: str = None,
               max_steps: int = 8) -> bool:
-    log.info("=== LOGIN START === navigating to %s", login_url)
-    page.goto(login_url, wait_until="domcontentloaded")
+    if login_url:
+        log.info("=== LOGIN START === navigating to %s", login_url)
+        page.goto(login_url, wait_until="domcontentloaded")
+        wait_for_settled(page)
+    else:
+        log.info("=== LOGIN START === logging in on the current page")
 
     history: list[str] = []
     for step in range(1, max_steps + 1):

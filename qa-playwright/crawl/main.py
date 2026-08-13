@@ -38,8 +38,9 @@ def _load_dotenv(path: str = ".env") -> None:
 _load_dotenv()
 
 from ai import AIClient
-from browser import has_cache, save_session, load_context, load_page
-from crawler import crawl
+from browser import (has_cache, save_session, load_context, load_page,
+                    has_password_field)
+from crawler import crawl, read_page
 from login_agent import run_login
 
 
@@ -67,23 +68,36 @@ def authenticate(browser, ai: AIClient, config: dict):
         log.info("=== AUTH === cache present -> reusing session, skipping login")
         return load_context(browser, config["storage_path"])
 
-    log.info("=== AUTH === no cache -> opening %s to discover the login link",
-             config["url"])
+    log.info("=== AUTH === no cache -> opening %s", config["url"])
     context = browser.new_context()
     page = context.new_page()
-    dom = load_page(page, config["url"])
-
-    analysis = ai.analyze_page(dom)
-    if not analysis.login_link:
-        raise RuntimeError("AI could not find a login link on the start page.")
-
-    login_url = urljoin(config["url"], analysis.login_link)
-    log.info("login link discovered: %s", login_url)
-
+    # gated targets redirect to login here; read_page waits out loading/redirects
+    dom, analysis = read_page(page, ai, config["url"])
     creds = {"email": config["email"], "password": config["password"]}
-    if not run_login(page, ai, login_url, creds):
+
+    # Did we land on a login page? Two generic signals: a password field
+    # (deterministic) or the AI flagging it (catches email-first steps).
+    on_login_page = analysis.is_login_page or has_password_field(page)
+
+    if on_login_page:
+        log.info("=== AUTH === landed on a login page (gated/redirect) -> logging in here")
+        ok = run_login(page, ai, creds)  # already on it; no navigation
+    elif analysis.login_link:
+        login_url = urljoin(config["url"], analysis.login_link)
+        log.info("=== AUTH === login link discovered: %s", login_url)
+        ok = run_login(page, ai, creds, login_url=login_url)
+    else:
+        log.warning("=== AUTH === no login page or link detected -> "
+                    "proceeding UNAUTHENTICATED")
+        page.close()
+        return context
+
+    if not ok:
         raise RuntimeError("Authentication failed -> aborting test run.")
 
+    # Return to the target so the crawl starts authenticated from there, and so
+    # the cached session's sessionStorage belongs to the target origin.
+    load_page(page, config["url"])
     save_session(context, page, config["storage_path"])
     page.close()
     return context

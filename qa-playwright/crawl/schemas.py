@@ -64,6 +64,22 @@ class Actionable(BaseModel):
 class PageAnalysis(BaseModel):
     site_type: str = Field(description="One line: what kind of site/page is this.")
     summary: str = Field(description="One line: what this page is for.")
+    is_loading: bool = Field(
+        default=False,
+        description=(
+            "True if this page is still LOADING — it shows mainly a spinner / "
+            "skeleton / 'loading' placeholder and the real content has not "
+            "rendered yet. Used to decide whether to wait and re-check."
+        ),
+    )
+    is_login_page: bool = Field(
+        default=False,
+        description=(
+            "True if THIS page is itself the login/sign-in/auth screen (shows "
+            "credential fields, or is clearly the login step — including an "
+            "email-first step before the password appears)."
+        ),
+    )
     login_link: Optional[str] = Field(
         default=None,
         description="URL of the login / sign-in entry point if present on this page.",

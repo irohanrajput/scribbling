@@ -1,0 +1,1721 @@
+[
+  {
+    "url": "https://upinthesky.in",
+    "depth": 0,
+    "site_type": "Travel and adventure planning website",
+    "summary": "This is the homepage of a travel company showcasing various trip packages, volunteer opportunities, services, customer testimonials, and travel blogs.",
+    "actionables": [
+      {
+        "label": "Toggle mobile navigation",
+        "kind": "button",
+        "selector": "nav > div > div.md:hidden > button",
+        "description": "Opens/closes the mobile navigation menu."
+      },
+      {
+        "label": "tushar",
+        "kind": "button",
+        "selector": "nav > div > div.hidden.md:flex > div.relative > button",
+        "description": "Opens user profile or account menu for 'tushar'."
+      },
+      {
+        "label": "Previous trip",
+        "kind": "button",
+        "selector": "div.relative.z-10.mx-4.sm:mx-\\[5.19rem\\] > div:nth-of-type(2) > div.mt-\\[2rem\\].relative > button:nth-of-type(1)",
+        "description": "Navigates to the previous trip package in the 'Upcoming memories' carousel."
+      },
+      {
+        "label": "Next trip",
+        "kind": "button",
+        "selector": "div.relative.z-10.mx-4.sm:mx-\\[5.19rem\\] > div:nth-of-type(2) > div.mt-\\[2rem\\].relative > button:nth-of-type(2)",
+        "description": "Navigates to the next trip package in the 'Upcoming memories' carousel."
+      },
+      {
+        "label": "Book Now \u2192 (Manali and Kasol)",
+        "kind": "button",
+        "selector": "div.flex.transition-transform > div:nth-of-type(1) button",
+        "description": "Initiates booking for Manali and Kasol trip."
+      },
+      {
+        "label": "Book Now \u2192 (Shimla and Kufri)",
+        "kind": "button",
+        "selector": "div.flex.transition-transform > div:nth-of-type(2) button",
+        "description": "Initiates booking for Shimla and Kufri trip."
+      },
+      {
+        "label": "Book Now \u2192 (McLeodganj)",
+        "kind": "button",
+        "selector": "div.flex.transition-transform > div:nth-of-type(3) button",
+        "description": "Initiates booking for McLeodganj trip."
+      },
+      {
+        "label": "Book Now \u2192 (Dalhousie)",
+        "kind": "button",
+        "selector": "div.flex.transition-transform > div:nth-of-type(4) button",
+        "description": "Initiates booking for Dalhousie trip."
+      },
+      {
+        "label": "Go to trip 1",
+        "kind": "button",
+        "selector": "div.relative.z-10.mx-4.sm:mx-\\[5.19rem\\] > div:nth-of-type(2) > div.flex.justify-center.mt-4.space-x-2 > button:nth-of-type(1)",
+        "description": "Navigates to the first trip in the 'Upcoming memories' carousel."
+      },
+      {
+        "label": "Go to trip 2",
+        "kind": "button",
+        "selector": "div.relative.z-10.mx-4.sm:mx-\\[5.19rem\\] > div:nth-of-type(2) > div.flex.justify-center.mt-4.space-x-2 > button:nth-of-type(2)",
+        "description": "Navigates to the second trip in the 'Upcoming memories' carousel."
+      },
+      {
+        "label": "Go to trip 3",
+        "kind": "button",
+        "selector": "div.relative.z-10.mx-4.sm:mx-\\[5.19rem\\] > div:nth-of-type(2) > div.flex.justify-center.mt-4.space-x-2 > button:nth-of-type(3)",
+        "description": "Navigates to the third trip in the 'Upcoming memories' carousel."
+      },
+      {
+        "label": "Go to trip 4",
+        "kind": "button",
+        "selector": "div.relative.z-10.mx-4.sm:mx-\\[5.19rem\\] > div:nth-of-type(2) > div.flex.justify-center.mt-4.space-x-2 > button:nth-of-type(4)",
+        "description": "Navigates to the fourth trip in the 'Upcoming memories' carousel."
+      },
+      {
+        "label": "View Opportunity \u2192 (Dharamshala)",
+        "kind": "button",
+        "selector": "div.mt-\\[2rem\\].grid > div:nth-of-type(1) > button",
+        "description": "Views details for Volunteer in Dharamshala as Farm Helper opportunity."
+      },
+      {
+        "label": "View Opportunity \u2192 (Leh)",
+        "kind": "button",
+        "selector": "div.mt-\\[2rem\\].grid > div:nth-of-type(2) > button",
+        "description": "Views details for Volunteer in Leh as Photography Guide opportunity."
+      },
+      {
+        "label": "View Opportunity \u2192 (McLeodganj)",
+        "kind": "button",
+        "selector": "div.mt-\\[2rem\\].grid > div:nth-of-type(3) > button",
+        "description": "Views details for Volunteer in McLeodganj as Cafe Assistant opportunity."
+      },
+      {
+        "label": "Know more about volunteer travel !",
+        "kind": "button",
+        "selector": "div.mt-8.flex.justify-center.gap-4 > button:nth-of-type(1)",
+        "description": "Provides more information about volunteer travel."
+      },
+      {
+        "label": "Explore All Volunteer Opportunities \u2192",
+        "kind": "button",
+        "selector": "div.mt-8.flex.justify-center.gap-4 > button:nth-of-type(2)",
+        "description": "Navigates to a page listing all volunteer opportunities."
+      },
+      {
+        "label": "Explore More \u2192 (Services)",
+        "kind": "button",
+        "selector": "div.sm:w-\\[60vw\\] > div:nth-of-type(4) > button",
+        "description": "Explores more about the services offered."
+      },
+      {
+        "label": "Previous Image",
+        "kind": "button",
+        "selector": "div.pt-\\[3.13rem\\]:nth-of-type(5) > div.flex.flex-col.items-center.mt-8.w-full.relative > button[aria-label='Previous Image']",
+        "description": "Navigates to the previous image in the 'What you can't do at your home' carousel."
+      },
+      {
+        "label": "Next Image",
+        "kind": "button",
+        "selector": "div.pt-\\[3.13rem\\]:nth-of-type(5) > div.flex.flex-col.items-center.mt-8.w-full.relative > button[aria-label='Next Image']",
+        "description": "Navigates to the next image in the 'What you can't do at your home' carousel."
+      },
+      {
+        "label": "Go to image 1",
+        "kind": "button",
+        "selector": "div.pt-\\[3.13rem\\]:nth-of-type(5) > div.flex.flex-col.items-center.mt-8.w-full.relative > div.flex.mt-\\[1rem\\].justify-center.space-x-\\[0.5rem\\] > button:nth-of-type(1)",
+        "description": "Navigates to the first image in the 'What you can't do at your home' carousel."
+      },
+      {
+        "label": "Go to image 2",
+        "kind": "button",
+        "selector": "div.pt-\\[3.13rem\\]:nth-of-type(5) > div.flex.flex-col.items-center.mt-8.w-full.relative > div.flex.mt-\\[1rem\\].justify-center.space-x-\\[0.5rem\\] > button:nth-of-type(2)",
+        "description": "Navigates to the second image in the 'What you can't do at your home' carousel."
+      },
+      {
+        "label": "Go to image 3",
+        "kind": "button",
+        "selector": "div.pt-\\[3.13rem\\]:nth-of-type(5) > div.flex.flex-col.items-center.mt-8.w-full.relative > div.flex.mt-\\[1rem\\].justify-center.space-x-\\[0.5rem\\] > button:nth-of-type(3)",
+        "description": "Navigates to the third image in the 'What you can't do at your home' carousel."
+      },
+      {
+        "label": "Go to image 4",
+        "kind": "button",
+        "selector": "div.pt-\\[3.13rem\\]:nth-of-type(5) > div.flex.flex-col.items-center.mt-8.w-full.relative > div.flex.mt-\\[1rem\\].justify-center.space-x-\\[0.5rem\\] > button:nth-of-type(4)",
+        "description": "Navigates to the fourth image in the 'What you can't do at your home' carousel."
+      },
+      {
+        "label": "Visit our previous moments \u2192",
+        "kind": "button",
+        "selector": "div.flex.flex-col.sm:flex-row.items-center.mt-\\[2rem\\].px-\\[1rem\\] > div.w-full.sm:w-\\[40vw\\] > div.mt-\\[1rem\\] > button",
+        "description": "Navigates to a page showcasing past customer moments/testimonials."
+      },
+      {
+        "label": "Go to testimonial 1 (desktop)",
+        "kind": "button",
+        "selector": "div.flex.mt-\\[1rem\\].justify-center.space-x-\\[0.5rem\\] > div.w-\\[1rem\\].h-\\[1rem\\].rounded-full.bg-black.hidden.sm:block:nth-of-type(1)",
+        "description": "Navigates to the first customer testimonial in the carousel (desktop)."
+      },
+      {
+        "label": "Go to testimonial 2 (desktop)",
+        "kind": "button",
+        "selector": "div.flex.mt-\\[1rem\\].justify-center.space-x-\\[0.5rem\\] > div.w-\\[1rem\\].h-\\[1rem\\].rounded-full.bg-gray-300.hidden.sm:block:nth-of-type(2)",
+        "description": "Navigates to the second customer testimonial in the carousel (desktop)."
+      },
+      {
+        "label": "Go to testimonial 3 (desktop)",
+        "kind": "button",
+        "selector": "div.flex.mt-\\[1rem\\].justify-center.space-x-\\[0.5rem\\] > div.w-\\[1rem\\].h-\\[1rem\\].rounded-full.bg-gray-300.hidden.sm:block:nth-of-type(3)",
+        "description": "Navigates to the third customer testimonial in the carousel (desktop)."
+      },
+      {
+        "label": "Go to testimonial 4 (desktop)",
+        "kind": "button",
+        "selector": "div.flex.mt-\\[1rem\\].justify-center.space-x-\\[0.5rem\\] > div.w-\\[1rem\\].h-\\[1rem\\].rounded-full.bg-gray-300.hidden.sm:block:nth-of-type(4)",
+        "description": "Navigates to the fourth customer testimonial in the carousel (desktop)."
+      },
+      {
+        "label": "Go to testimonial 1 (mobile)",
+        "kind": "button",
+        "selector": "div.sm:hidden.flex.mt-\\[1rem\\].justify-center.space-x-\\[0.5rem\\] > div:nth-of-type(1)",
+        "description": "Navigates to the first customer testimonial in the carousel (mobile)."
+      },
+      {
+        "label": "Go to testimonial 2 (mobile)",
+        "kind": "button",
+        "selector": "div.sm:hidden.flex.mt-\\[1rem\\].justify-center.space-x-\\[0.5rem\\] > div:nth-of-type(2)",
+        "description": "Navigates to the second customer testimonial in the carousel (mobile)."
+      },
+      {
+        "label": "Go to testimonial 3 (mobile)",
+        "kind": "button",
+        "selector": "div.sm:hidden.flex.mt-\\[1rem\\].justify-center.space-x-\\[0.5rem\\] > div:nth-of-type(3)",
+        "description": "Navigates to the third customer testimonial in the carousel (mobile)."
+      },
+      {
+        "label": "Go to testimonial 4 (mobile)",
+        "kind": "button",
+        "selector": "div.sm:hidden.flex.mt-\\[1rem\\].justify-center.space-x-\\[0.5rem\\] > div:nth-of-type(4)",
+        "description": "Navigates to the fourth customer testimonial in the carousel (mobile)."
+      },
+      {
+        "label": "Previous blog post",
+        "kind": "button",
+        "selector": "div.pt-\\[3.13rem\\]:nth-of-type(6) > div.mt-\\[2rem\\].relative > button:nth-of-type(1)",
+        "description": "Navigates to the previous blog post in the 'Revolutionsing The Ways We Travel' carousel."
+      },
+      {
+        "label": "Next blog post",
+        "kind": "button",
+        "selector": "div.pt-\\[3.13rem\\]:nth-of-type(6) > div.mt-\\[2rem\\].relative > button:nth-of-type(2)",
+        "description": "Navigates to the next blog post in the 'Revolutionsing The Ways We Travel' carousel."
+      },
+      {
+        "label": "Go to blog post 1",
+        "kind": "button",
+        "selector": "div.pt-\\[3.13rem\\]:nth-of-type(6) > div.mt-\\[2rem\\].relative > div.flex.justify-center.mt-4.space-x-2 > button:nth-of-type(1)",
+        "description": "Navigates to the first blog post in the 'Revolutionsing The Ways We Travel' carousel."
+      },
+      {
+        "label": "Go to blog post 2",
+        "kind": "button",
+        "selector": "div.pt-\\[3.13rem\\]:nth-of-type(6) > div.mt-\\[2rem\\].relative > div.flex.justify-center.mt-4.space-x-2 > button:nth-of-type(2)",
+        "description": "Navigates to the second blog post in the 'Revolutionsing The Ways We Travel' carousel."
+      },
+      {
+        "label": "Go to blog post 3",
+        "kind": "button",
+        "selector": "div.pt-\\[3.13rem\\]:nth-of-type(6) > div.mt-\\[2rem\\].relative > div.flex.justify-center.mt-4.space-x-2 > button:nth-of-type(3)",
+        "description": "Navigates to the third blog post in the 'Revolutionsing The Ways We Travel' carousel."
+      },
+      {
+        "label": "Go to blog post 4",
+        "kind": "button",
+        "selector": "div.pt-\\[3.13rem\\]:nth-of-type(6) > div.mt-\\[2rem\\].relative > div.flex.justify-center.mt-4.space-x-2 > button:nth-of-type(4)",
+        "description": "Navigates to the fourth blog post in the 'Revolutionsing The Ways We Travel' carousel."
+      }
+    ],
+    "test_cases": [
+      {
+        "title": "Open mobile navigation menu",
+        "steps": [
+          "Click the 'Toggle mobile navigation' button"
+        ],
+        "expected": "The mobile navigation menu is displayed."
+      },
+      {
+        "title": "Close mobile navigation menu",
+        "steps": [
+          "Click the 'Toggle mobile navigation' button to open the menu",
+          "Click the 'Toggle mobile navigation' button again"
+        ],
+        "expected": "The mobile navigation menu is closed."
+      },
+      {
+        "title": "Open user profile menu for 'tushar'",
+        "steps": [
+          "Click the 'tushar' button"
+        ],
+        "expected": "The user profile or account menu for 'tushar' is displayed."
+      },
+      {
+        "title": "Navigate to the previous trip package",
+        "steps": [
+          "Ensure a trip package other than the first one is currently displayed in the 'Upcoming memories' carousel",
+          "Click the 'Previous trip' button"
+        ],
+        "expected": "The previous trip package in the 'Upcoming memories' carousel is displayed."
+      },
+      {
+        "title": "Attempt to navigate previous when at the first trip",
+        "steps": [
+          "Ensure the first trip package is currently displayed in the 'Upcoming memories' carousel",
+          "Click the 'Previous trip' button"
+        ],
+        "expected": "The carousel remains on the first trip package, and no error is displayed."
+      },
+      {
+        "title": "Navigate to the next trip package",
+        "steps": [
+          "Ensure a trip package other than the last one is currently displayed in the 'Upcoming memories' carousel",
+          "Click the 'Next trip' button"
+        ],
+        "expected": "The next trip package in the 'Upcoming memories' carousel is displayed."
+      },
+      {
+        "title": "Attempt to navigate next when at the last trip",
+        "steps": [
+          "Ensure the last trip package is currently displayed in the 'Upcoming memories' carousel",
+          "Click the 'Next trip' button"
+        ],
+        "expected": "The carousel remains on the last trip package, and no error is displayed."
+      },
+      {
+        "title": "Initiate booking for Manali and Kasol trip",
+        "steps": [
+          "Click the 'Book Now \u2192 (Manali and Kasol)' button"
+        ],
+        "expected": "The booking process for the Manali and Kasol trip is initiated, navigating to a booking page or showing a booking form."
+      },
+      {
+        "title": "Initiate booking for Shimla and Kufri trip",
+        "steps": [
+          "Click the 'Book Now \u2192 (Shimla and Kufri)' button"
+        ],
+        "expected": "The booking process for the Shimla and Kufri trip is initiated, navigating to a booking page or showing a booking form."
+      },
+      {
+        "title": "Initiate booking for McLeodganj trip",
+        "steps": [
+          "Click the 'Book Now \u2192 (McLeodganj)' button"
+        ],
+        "expected": "The booking process for the McLeodganj trip is initiated, navigating to a booking page or showing a booking form."
+      },
+      {
+        "title": "Initiate booking for Dalhousie trip",
+        "steps": [
+          "Click the 'Book Now \u2192 (Dalhousie)' button"
+        ],
+        "expected": "The booking process for the Dalhousie trip is initiated, navigating to a booking page or showing a booking form."
+      },
+      {
+        "title": "Navigate to the first trip in 'Upcoming memories'",
+        "steps": [
+          "Click the 'Go to trip 1' button"
+        ],
+        "expected": "The first trip package in the 'Upcoming memories' carousel is displayed."
+      },
+      {
+        "title": "Navigate to the second trip in 'Upcoming memories'",
+        "steps": [
+          "Click the 'Go to trip 2' button"
+        ],
+        "expected": "The second trip package in the 'Upcoming memories' carousel is displayed."
+      },
+      {
+        "title": "Navigate to the third trip in 'Upcoming memories'",
+        "steps": [
+          "Click the 'Go to trip 3' button"
+        ],
+        "expected": "The third trip package in the 'Upcoming memories' carousel is displayed."
+      },
+      {
+        "title": "Navigate to the fourth trip in 'Upcoming memories'",
+        "steps": [
+          "Click the 'Go to trip 4' button"
+        ],
+        "expected": "The fourth trip package in the 'Upcoming memories' carousel is displayed."
+      },
+      {
+        "title": "View details for Dharamshala volunteer opportunity",
+        "steps": [
+          "Click the 'View Opportunity \u2192 (Dharamshala)' button"
+        ],
+        "expected": "The details page for the 'Volunteer in Dharamshala as Farm Helper' opportunity is displayed."
+      },
+      {
+        "title": "View details for Leh volunteer opportunity",
+        "steps": [
+          "Click the 'View Opportunity \u2192 (Leh)' button"
+        ],
+        "expected": "The details page for the 'Volunteer in Leh as Photography Guide' opportunity is displayed."
+      },
+      {
+        "title": "View details for McLeodganj volunteer opportunity",
+        "steps": [
+          "Click the 'View Opportunity \u2192 (McLeodganj)' button"
+        ],
+        "expected": "The details page for the 'Volunteer in McLeodganj as Cafe Assistant' opportunity is displayed."
+      },
+      {
+        "title": "Access more information about volunteer travel",
+        "steps": [
+          "Click the 'Know more about volunteer travel !' button"
+        ],
+        "expected": "A page or section providing more information about volunteer travel is displayed."
+      },
+      {
+        "title": "Explore all volunteer opportunities",
+        "steps": [
+          "Click the 'Explore All Volunteer Opportunities \u2192' button"
+        ],
+        "expected": "A page listing all available volunteer opportunities is displayed."
+      },
+      {
+        "title": "Explore more about services offered",
+        "steps": [
+          "Click the 'Explore More \u2192 (Services)' button"
+        ],
+        "expected": "A page or section detailing more about the services offered is displayed."
+      },
+      {
+        "title": "Navigate to the previous image in the carousel",
+        "steps": [
+          "Ensure an image other than the first one is currently displayed in the 'What you can't do at your home' carousel",
+          "Click the 'Previous Image' button"
+        ],
+        "expected": "The previous image in the 'What you can't do at your home' carousel is displayed."
+      },
+      {
+        "title": "Attempt to navigate previous when at the first image",
+        "steps": [
+          "Ensure the first image is currently displayed in the 'What you can't do at your home' carousel",
+          "Click the 'Previous Image' button"
+        ],
+        "expected": "The carousel remains on the first image, and no error is displayed."
+      },
+      {
+        "title": "Navigate to the next image in the carousel",
+        "steps": [
+          "Ensure an image other than the last one is currently displayed in the 'What you can't do at your home' carousel",
+          "Click the 'Next Image' button"
+        ],
+        "expected": "The next image in the 'What you can't do at your home' carousel is displayed."
+      },
+      {
+        "title": "Attempt to navigate next when at the last image",
+        "steps": [
+          "Ensure the last image is currently displayed in the 'What you can't do at your home' carousel",
+          "Click the 'Next Image' button"
+        ],
+        "expected": "The carousel remains on the last image, and no error is displayed."
+      },
+      {
+        "title": "Navigate to the first image in the carousel",
+        "steps": [
+          "Click the 'Go to image 1' button"
+        ],
+        "expected": "The first image in the 'What you can't do at your home' carousel is displayed."
+      },
+      {
+        "title": "Navigate to the second image in the carousel",
+        "steps": [
+          "Click the 'Go to image 2' button"
+        ],
+        "expected": "The second image in the 'What you can't do at your home' carousel is displayed."
+      },
+      {
+        "title": "Navigate to the third image in the carousel",
+        "steps": [
+          "Click the 'Go to image 3' button"
+        ],
+        "expected": "The third image in the 'What you can't do at your home' carousel is displayed."
+      },
+      {
+        "title": "Navigate to the fourth image in the carousel",
+        "steps": [
+          "Click the 'Go to image 4' button"
+        ],
+        "expected": "The fourth image in the 'What you can't do at your home' carousel is displayed."
+      },
+      {
+        "title": "Visit the page showcasing previous moments",
+        "steps": [
+          "Click the 'Visit our previous moments \u2192' button"
+        ],
+        "expected": "A page showcasing past customer moments or testimonials is displayed."
+      },
+      {
+        "title": "Navigate to the first desktop testimonial",
+        "steps": [
+          "Click the 'Go to testimonial 1 (desktop)' button"
+        ],
+        "expected": "The first customer testimonial is displayed in the desktop carousel."
+      },
+      {
+        "title": "Navigate to the second desktop testimonial",
+        "steps": [
+          "Click the 'Go to testimonial 2 (desktop)' button"
+        ],
+        "expected": "The second customer testimonial is displayed in the desktop carousel."
+      },
+      {
+        "title": "Navigate to the third desktop testimonial",
+        "steps": [
+          "Click the 'Go to testimonial 3 (desktop)' button"
+        ],
+        "expected": "The third customer testimonial is displayed in the desktop carousel."
+      },
+      {
+        "title": "Navigate to the fourth desktop testimonial",
+        "steps": [
+          "Click the 'Go to testimonial 4 (desktop)' button"
+        ],
+        "expected": "The fourth customer testimonial is displayed in the desktop carousel."
+      },
+      {
+        "title": "Navigate to the first mobile testimonial",
+        "steps": [
+          "Click the 'Go to testimonial 1 (mobile)' button"
+        ],
+        "expected": "The first customer testimonial is displayed in the mobile carousel."
+      },
+      {
+        "title": "Navigate to the second mobile testimonial",
+        "steps": [
+          "Click the 'Go to testimonial 2 (mobile)' button"
+        ],
+        "expected": "The second customer testimonial is displayed in the mobile carousel."
+      },
+      {
+        "title": "Navigate to the third mobile testimonial",
+        "steps": [
+          "Click the 'Go to testimonial 3 (mobile)' button"
+        ],
+        "expected": "The third customer testimonial is displayed in the mobile carousel."
+      },
+      {
+        "title": "Navigate to the fourth mobile testimonial",
+        "steps": [
+          "Click the 'Go to testimonial 4 (mobile)' button"
+        ],
+        "expected": "The fourth customer testimonial is displayed in the mobile carousel."
+      },
+      {
+        "title": "Navigate to the previous blog post",
+        "steps": [
+          "Ensure a blog post other than the first one is currently displayed in the 'Revolutionsing The Ways We Travel' carousel",
+          "Click the 'Previous blog post' button"
+        ],
+        "expected": "The previous blog post in the 'Revolutionsing The Ways We Travel' carousel is displayed."
+      },
+      {
+        "title": "Attempt to navigate previous when at the first blog post",
+        "steps": [
+          "Ensure the first blog post is currently displayed in the 'Revolutionsing The Ways We Travel' carousel",
+          "Click the 'Previous blog post' button"
+        ],
+        "expected": "The carousel remains on the first blog post, and no error is displayed."
+      },
+      {
+        "title": "Navigate to the next blog post",
+        "steps": [
+          "Ensure a blog post other than the last one is currently displayed in the 'Revolutionsing The Ways We Travel' carousel",
+          "Click the 'Next blog post' button"
+        ],
+        "expected": "The next blog post in the 'Revolutionsing The Ways We Travel' carousel is displayed."
+      },
+      {
+        "title": "Attempt to navigate next when at the last blog post",
+        "steps": [
+          "Ensure the last blog post is currently displayed in the 'Revolutionsing The Ways We Travel' carousel",
+          "Click the 'Next blog post' button"
+        ],
+        "expected": "The carousel remains on the last blog post, and no error is displayed."
+      },
+      {
+        "title": "Navigate to the first blog post",
+        "steps": [
+          "Click the 'Go to blog post 1' button"
+        ],
+        "expected": "The first blog post in the 'Revolutionsing The Ways We Travel' carousel is displayed."
+      },
+      {
+        "title": "Navigate to the second blog post",
+        "steps": [
+          "Click the 'Go to blog post 2' button"
+        ],
+        "expected": "The second blog post in the 'Revolutionsing The Ways We Travel' carousel is displayed."
+      },
+      {
+        "title": "Navigate to the third blog post",
+        "steps": [
+          "Click the 'Go to blog post 3' button"
+        ],
+        "expected": "The third blog post in the 'Revolutionsing The Ways We Travel' carousel is displayed."
+      },
+      {
+        "title": "Navigate to the fourth blog post",
+        "steps": [
+          "Click the 'Go to blog post 4' button"
+        ],
+        "expected": "The fourth blog post in the 'Revolutionsing The Ways We Travel' carousel is displayed."
+      }
+    ]
+  },
+  {
+    "url": "https://upinthesky.in/about",
+    "depth": 1,
+    "site_type": "Travel community and blog site",
+    "summary": "This page provides information about UpInTheSky's mission, values, and offerings, serving as an 'About Us' section.",
+    "actionables": [
+      {
+        "label": "tushar",
+        "kind": "button",
+        "selector": "div.relative > button",
+        "description": "Opens a user-specific menu or navigates to a user profile."
+      },
+      {
+        "label": "Open mobile navigation",
+        "kind": "button",
+        "selector": "div.md\\:hidden > button",
+        "description": "Toggles the visibility of the mobile navigation menu."
+      }
+    ],
+    "test_cases": [
+      {
+        "title": "Open user menu via 'tushar' button",
+        "steps": [
+          "Click the 'tushar' button"
+        ],
+        "expected": "The user-specific menu or profile page is displayed."
+      },
+      {
+        "title": "Close user menu by clicking outside after opening with 'tushar' button",
+        "steps": [
+          "Click the 'tushar' button",
+          "Click an area outside the opened menu"
+        ],
+        "expected": "The user-specific menu is no longer displayed."
+      },
+      {
+        "title": "Open mobile navigation menu",
+        "steps": [
+          "Ensure the viewport is at a mobile size",
+          "Click the 'Open mobile navigation' button"
+        ],
+        "expected": "The mobile navigation menu is displayed."
+      },
+      {
+        "title": "Close mobile navigation menu by clicking the button again",
+        "steps": [
+          "Ensure the viewport is at a mobile size",
+          "Click the 'Open mobile navigation' button to open the menu",
+          "Click the 'Open mobile navigation' button again"
+        ],
+        "expected": "The mobile navigation menu is no longer displayed."
+      }
+    ]
+  },
+  {
+    "url": "https://upinthesky.in/blog",
+    "depth": 1,
+    "site_type": "Travel story and blog site",
+    "summary": "This page is a loading screen, indicating that amazing travel stories are being curated for the user.",
+    "actionables": [
+      {
+        "label": "tushar",
+        "kind": "button",
+        "selector": "div.relative > button.text-lg.font-latoSemibold.px-4.hover:text-blue-500.cursor-pointer.focus:outline-none.flex.items-center.gap-2.opacity-75",
+        "description": "Opens a user-specific menu or profile options."
+      },
+      {
+        "label": "Mobile Menu",
+        "kind": "button",
+        "selector": "div.md:hidden > button.text-black.focus:outline-none",
+        "description": "Toggles the navigation menu for mobile devices."
+      }
+    ],
+    "test_cases": [
+      {
+        "title": "Open user profile menu",
+        "steps": [
+          "Click the \"tushar\" button"
+        ],
+        "expected": "A user-specific menu or profile options dropdown is displayed."
+      },
+      {
+        "title": "Close user profile menu by clicking outside",
+        "steps": [
+          "Click the \"tushar\" button",
+          "Verify the user menu is open",
+          "Click an area outside the user menu and the \"tushar\" button"
+        ],
+        "expected": "The user-specific menu or profile options dropdown is closed."
+      },
+      {
+        "title": "Open mobile navigation menu on a mobile viewport",
+        "steps": [
+          "Set the browser viewport to a mobile device size",
+          "Click the \"Mobile Menu\" button"
+        ],
+        "expected": "The mobile navigation menu is displayed, covering a significant portion of the screen."
+      },
+      {
+        "title": "Mobile Menu button not visible on desktop viewport",
+        "steps": [
+          "Set the browser viewport to a desktop device size"
+        ],
+        "expected": "The \"Mobile Menu\" button is not visible on the page."
+      }
+    ]
+  },
+  {
+    "url": "https://upinthesky.in/contactUs",
+    "depth": 1,
+    "site_type": "Travel planning and community site",
+    "summary": "This page is a contact form and information hub for users to get in touch with UpInTheSky for trip inquiries, support, or general questions.",
+    "actionables": [
+      {
+        "label": "User Profile/Options",
+        "kind": "button",
+        "selector": "div.relative > button.text-lg.font-latoSemibold.px-4.hover:text-blue-500",
+        "description": "Opens a menu or navigates to user-specific options for 'tushar'."
+      },
+      {
+        "label": "Mobile Navigation Toggle",
+        "kind": "button",
+        "selector": "div.md\\:hidden > button.text-black.focus\\:outline-none",
+        "description": "Toggles the visibility of the mobile navigation menu."
+      },
+      {
+        "label": "Send us a Message",
+        "kind": "form",
+        "selector": "form.space-y-6",
+        "description": "A form to submit a message to the UpInTheSky team."
+      },
+      {
+        "label": "Name",
+        "kind": "input",
+        "selector": "input[name='name']",
+        "description": "Input field for the user's full name."
+      },
+      {
+        "label": "Email",
+        "kind": "input",
+        "selector": "input[name='email']",
+        "description": "Input field for the user's email address."
+      },
+      {
+        "label": "Subject",
+        "kind": "input",
+        "selector": "select[name='subject']",
+        "description": "Dropdown to select the subject of the message."
+      },
+      {
+        "label": "Message",
+        "kind": "input",
+        "selector": "textarea[name='message']",
+        "description": "Text area for the user to type their message."
+      },
+      {
+        "label": "Send Message",
+        "kind": "button",
+        "selector": "button[type='submit']",
+        "description": "Submits the contact form."
+      }
+    ],
+    "test_cases": [
+      {
+        "title": "Open User Profile/Options menu",
+        "steps": [
+          "Click the 'User Profile/Options' button"
+        ],
+        "expected": "A menu with user-specific options for 'tushar' is displayed"
+      },
+      {
+        "title": "Open Mobile Navigation menu",
+        "steps": [
+          "Click the 'Mobile Navigation Toggle' button"
+        ],
+        "expected": "The mobile navigation menu becomes visible"
+      },
+      {
+        "title": "Close Mobile Navigation menu",
+        "steps": [
+          "Click the 'Mobile Navigation Toggle' button",
+          "Click the 'Mobile Navigation Toggle' button again"
+        ],
+        "expected": "The mobile navigation menu becomes hidden"
+      },
+      {
+        "title": "Submit 'Send us a Message' form with valid data",
+        "steps": [
+          "Enter a valid full name in the 'Name' input field",
+          "Enter a valid email address in the 'Email' input field",
+          "Select a subject from the 'Subject' dropdown",
+          "Enter a message in the 'Message' text area",
+          "Click the 'Send Message' button"
+        ],
+        "expected": "A success confirmation message is displayed, and the form fields are cleared or redirected"
+      },
+      {
+        "title": "Reject 'Send us a Message' form submission with missing required fields",
+        "steps": [
+          "Leave the 'Name' input field empty",
+          "Leave the 'Email' input field empty",
+          "Leave the 'Subject' dropdown unselected (if applicable, or select default if not required)",
+          "Leave the 'Message' text area empty",
+          "Click the 'Send Message' button"
+        ],
+        "expected": "Validation errors are displayed for all missing required fields"
+      },
+      {
+        "title": "Reject 'Send us a Message' form submission with an invalid email format",
+        "steps": [
+          "Enter a valid full name in the 'Name' input field",
+          "Enter 'invalid-email-format' in the 'Email' input field",
+          "Select a subject from the 'Subject' dropdown",
+          "Enter a message in the 'Message' text area",
+          "Click the 'Send Message' button"
+        ],
+        "expected": "A validation error is displayed specifically for the 'Email' input field"
+      }
+    ]
+  },
+  {
+    "url": "https://upinthesky.in/explore",
+    "depth": 1,
+    "site_type": "placeholder / coming soon page",
+    "summary": "This page announces that the 'UpInTheSky' service is under development and provides links to its social media channels.",
+    "actionables": [
+      {
+        "label": "Instagram",
+        "kind": "link-action",
+        "selector": "a[href=\"https://instagram.com/upinthesky.in\"]",
+        "description": "Navigates to the UpInTheSky Instagram profile."
+      },
+      {
+        "label": "WhatsApp",
+        "kind": "link-action",
+        "selector": "a[href=\"https://chat.whatsapp.com/FGO8fMlwMzUIYRoV9J6whT\"]",
+        "description": "Navigates to the UpInTheSky WhatsApp group chat."
+      }
+    ],
+    "test_cases": [
+      {
+        "title": "Navigate to Instagram profile",
+        "steps": [
+          "Click the 'Instagram' link"
+        ],
+        "expected": "The UpInTheSky Instagram profile page opens in a new tab or window."
+      },
+      {
+        "title": "Instagram link opens in new tab",
+        "steps": [
+          "Click the 'Instagram' link"
+        ],
+        "expected": "The current page remains open, and the Instagram profile page opens in a new tab or window."
+      },
+      {
+        "title": "Navigate to WhatsApp group chat",
+        "steps": [
+          "Click the 'WhatsApp' link"
+        ],
+        "expected": "The UpInTheSky WhatsApp group chat opens in a new tab or window."
+      },
+      {
+        "title": "WhatsApp link opens in new tab",
+        "steps": [
+          "Click the 'WhatsApp' link"
+        ],
+        "expected": "The current page remains open, and the WhatsApp group chat opens in a new tab or window."
+      }
+    ]
+  },
+  {
+    "url": "https://upinthesky.in/authenticate",
+    "depth": 2,
+    "site_type": "Travel booking and community platform",
+    "summary": "This page serves as the primary authentication gateway, allowing users to log in or sign up for the UpInTheSky platform.",
+    "actionables": [
+      {
+        "label": "tushar",
+        "kind": "button",
+        "selector": "div.relative > button",
+        "description": "Opens a user-specific menu or profile options."
+      },
+      {
+        "label": "Mobile menu toggle",
+        "kind": "button",
+        "selector": "div.md\\:hidden > button",
+        "description": "Toggles the visibility of the mobile navigation menu."
+      },
+      {
+        "label": "Login",
+        "kind": "toggle",
+        "selector": "label[for='login']",
+        "description": "Switches the form to the login view."
+      },
+      {
+        "label": "Signup",
+        "kind": "toggle",
+        "selector": "label[for='signup']",
+        "description": "Switches the form to the signup view."
+      },
+      {
+        "label": "Email Address",
+        "kind": "input",
+        "selector": "form.login > div.field > input[type='email'][name='email']",
+        "description": "Input field for user's email address during login."
+      },
+      {
+        "label": "Password",
+        "kind": "input",
+        "selector": "form.login > div.field > input[type='password'][name='password']",
+        "description": "Input field for user's password during login."
+      },
+      {
+        "label": "Login",
+        "kind": "button",
+        "selector": "form.login > div.field.btn > input[type='submit']",
+        "description": "Submits the login form with provided credentials."
+      },
+      {
+        "label": "Login with Google",
+        "kind": "button",
+        "selector": "form.login > div.field.btn:nth-of-type(3) > button",
+        "description": "Initiates login using a Google account."
+      },
+      {
+        "label": "Email Address",
+        "kind": "input",
+        "selector": "form.signup > div.field > input[type='email'][name='email']",
+        "description": "Input field for user's email address during signup."
+      },
+      {
+        "label": "Password",
+        "kind": "input",
+        "selector": "form.signup > div.field > input[type='password'][name='password']",
+        "description": "Input field for user's password during signup."
+      },
+      {
+        "label": "Confirm password",
+        "kind": "input",
+        "selector": "form.signup > div.field > input[type='password'][name='confirmPassword']",
+        "description": "Input field to confirm the user's password during signup."
+      },
+      {
+        "label": "Signup",
+        "kind": "button",
+        "selector": "form.signup > div.field.btn > input[type='submit']",
+        "description": "Submits the signup form with provided details."
+      },
+      {
+        "label": "Signup with Google",
+        "kind": "button",
+        "selector": "form.signup > div.field.btn:nth-of-type(2) > button",
+        "description": "Initiates signup using a Google account."
+      },
+      {
+        "label": "Traveler",
+        "kind": "button",
+        "selector": "form.signup > div.field:nth-of-type(4) > div > button:nth-of-type(1)",
+        "description": "Selects the 'Traveler' role for signup."
+      },
+      {
+        "label": "Host",
+        "kind": "button",
+        "selector": "form.signup > div.field:nth-of-type(4) > div > button:nth-of-type(2)",
+        "description": "Selects the 'Host' role for signup."
+      }
+    ],
+    "test_cases": [
+      {
+        "title": "Open user-specific menu",
+        "steps": [
+          "Click the 'tushar' button"
+        ],
+        "expected": "A user-specific menu or profile options are displayed."
+      },
+      {
+        "title": "Toggle mobile menu visibility",
+        "steps": [
+          "Click the 'Mobile menu toggle' button"
+        ],
+        "expected": "The mobile navigation menu becomes visible."
+      },
+      {
+        "title": "Hide mobile menu",
+        "steps": [
+          "Click the 'Mobile menu toggle' button when the menu is open"
+        ],
+        "expected": "The mobile navigation menu becomes hidden."
+      },
+      {
+        "title": "Switch to Login view",
+        "steps": [
+          "Click the 'Login' toggle"
+        ],
+        "expected": "The form switches to display the login fields."
+      },
+      {
+        "title": "Switch to Signup view",
+        "steps": [
+          "Click the 'Signup' toggle"
+        ],
+        "expected": "The form switches to display the signup fields."
+      },
+      {
+        "title": "Enter valid email for login",
+        "steps": [
+          "Navigate to the Login form",
+          "Enter a valid email address (e.g., 'user@example.com') into the 'Email Address' input field"
+        ],
+        "expected": "The email address is successfully entered into the field."
+      },
+      {
+        "title": "Reject invalid email format for login",
+        "steps": [
+          "Navigate to the Login form",
+          "Enter an invalid email address (e.g., 'invalid-email') into the 'Email Address' input field"
+        ],
+        "expected": "A validation error message is displayed for the 'Email Address' field."
+      },
+      {
+        "title": "Enter password for login",
+        "steps": [
+          "Navigate to the Login form",
+          "Enter a password into the 'Password' input field"
+        ],
+        "expected": "The password is successfully entered into the field (masked)."
+      },
+      {
+        "title": "Successful login with valid credentials",
+        "steps": [
+          "Navigate to the Login form",
+          "Enter a valid email address into the 'Email Address' input field",
+          "Enter a valid password into the 'Password' input field",
+          "Click the 'Login' button"
+        ],
+        "expected": "The user is successfully logged in and redirected to the dashboard or home page."
+      },
+      {
+        "title": "Login failure with invalid credentials",
+        "steps": [
+          "Navigate to the Login form",
+          "Enter an invalid email address or password into the respective input fields",
+          "Click the 'Login' button"
+        ],
+        "expected": "An error message indicating invalid credentials is displayed."
+      },
+      {
+        "title": "Initiate login with Google",
+        "steps": [
+          "Click the 'Login with Google' button"
+        ],
+        "expected": "A Google login pop-up or redirect to Google's authentication page appears."
+      },
+      {
+        "title": "Enter valid email for signup",
+        "steps": [
+          "Navigate to the Signup form",
+          "Enter a valid email address (e.g., 'newuser@example.com') into the 'Email Address' input field"
+        ],
+        "expected": "The email address is successfully entered into the field."
+      },
+      {
+        "title": "Reject invalid email format for signup",
+        "steps": [
+          "Navigate to the Signup form",
+          "Enter an invalid email address (e.g., 'bad-email') into the 'Email Address' input field"
+        ],
+        "expected": "A validation error message is displayed for the 'Email Address' field."
+      },
+      {
+        "title": "Enter password for signup",
+        "steps": [
+          "Navigate to the Signup form",
+          "Enter a strong password into the 'Password' input field"
+        ],
+        "expected": "The password is successfully entered into the field (masked)."
+      },
+      {
+        "title": "Enter weak password for signup",
+        "steps": [
+          "Navigate to the Signup form",
+          "Enter a weak password (e.g., '123') into the 'Password' input field"
+        ],
+        "expected": "A validation error message indicating the password is too weak or does not meet criteria is displayed."
+      },
+      {
+        "title": "Confirm password matches",
+        "steps": [
+          "Navigate to the Signup form",
+          "Enter a password into the 'Password' input field",
+          "Enter the exact same password into the 'Confirm password' input field"
+        ],
+        "expected": "The 'Confirm password' field accepts the input without error."
+      },
+      {
+        "title": "Confirm password mismatch",
+        "steps": [
+          "Navigate to the Signup form",
+          "Enter a password into the 'Password' input field",
+          "Enter a different password into the 'Confirm password' input field"
+        ],
+        "expected": "A validation error message indicating that the passwords do not match is displayed."
+      },
+      {
+        "title": "Successful signup with valid details",
+        "steps": [
+          "Navigate to the Signup form",
+          "Enter a valid email address",
+          "Enter a strong password",
+          "Enter the same password in 'Confirm password'",
+          "Select a role (e.g., 'Traveler')",
+          "Click the 'Signup' button"
+        ],
+        "expected": "The user account is successfully created, and the user is logged in or redirected to a confirmation page."
+      },
+      {
+        "title": "Signup failure with missing required fields",
+        "steps": [
+          "Navigate to the Signup form",
+          "Leave one or more required fields (e.g., 'Email Address') empty",
+          "Click the 'Signup' button"
+        ],
+        "expected": "Validation error messages are displayed for all missing required fields."
+      },
+      {
+        "title": "Initiate signup with Google",
+        "steps": [
+          "Click the 'Signup with Google' button"
+        ],
+        "expected": "A Google signup pop-up or redirect to Google's authentication page appears."
+      },
+      {
+        "title": "Select 'Traveler' role",
+        "steps": [
+          "Navigate to the Signup form",
+          "Click the 'Traveler' button"
+        ],
+        "expected": "The 'Traveler' role is selected, and its state is visually indicated (e.g., highlighted)."
+      },
+      {
+        "title": "Select 'Host' role",
+        "steps": [
+          "Navigate to the Signup form",
+          "Click the 'Host' button"
+        ],
+        "expected": "The 'Host' role is selected, and its state is visually indicated (e.g., highlighted)."
+      }
+    ]
+  },
+  {
+    "url": "https://upinthesky.in/",
+    "depth": 2,
+    "site_type": "Travel agency and volunteer program site",
+    "summary": "This page showcases travel packages, volunteer opportunities, services, customer testimonials, and blog posts to encourage adventure travel.",
+    "actionables": [
+      {
+        "label": "Open mobile menu",
+        "kind": "button",
+        "selector": "div.md\\:hidden > button",
+        "description": "Toggles the mobile navigation menu."
+      },
+      {
+        "label": "tushar (User Profile)",
+        "kind": "button",
+        "selector": "nav div.relative > button",
+        "description": "Opens user profile or account options."
+      },
+      {
+        "label": "Previous trip",
+        "kind": "button",
+        "selector": "div.relative > button:nth-of-type(1)",
+        "description": "Navigates to the previous trip in the 'Upcoming memories' carousel."
+      },
+      {
+        "label": "Next trip",
+        "kind": "button",
+        "selector": "div.relative > button:nth-of-type(2)",
+        "description": "Navigates to the next trip in the 'Upcoming memories' carousel."
+      },
+      {
+        "label": "Book Now (Manali and Kasol)",
+        "kind": "button",
+        "selector": "div.w-full.sm\\:w-\\[29vw\\]:nth-of-type(1) button",
+        "description": "Initiates the booking process for the Manali and Kasol trip."
+      },
+      {
+        "label": "Book Now (Shimla and Kufri)",
+        "kind": "button",
+        "selector": "div.w-full.sm\\:w-\\[29vw\\]:nth-of-type(2) button",
+        "description": "Initiates the booking process for the Shimla and Kufri trip."
+      },
+      {
+        "label": "Book Now (McLeodganj)",
+        "kind": "button",
+        "selector": "div.w-full.sm\\:w-\\[29vw\\]:nth-of-type(3) button",
+        "description": "Initiates the booking process for the McLeodganj trip."
+      },
+      {
+        "label": "Book Now (Dalhousie)",
+        "kind": "button",
+        "selector": "div.w-full.sm\\:w-\\[29vw\\]:nth-of-type(4) button",
+        "description": "Initiates the booking process for the Dalhousie trip."
+      },
+      {
+        "label": "Go to trip slide 1",
+        "kind": "button",
+        "selector": "div.flex.justify-center.mt-4.space-x-2 > button:nth-of-type(1)",
+        "description": "Navigates to the first slide of upcoming trips."
+      },
+      {
+        "label": "Go to trip slide 2",
+        "kind": "button",
+        "selector": "div.flex.justify-center.mt-4.space-x-2 > button:nth-of-type(2)",
+        "description": "Navigates to the second slide of upcoming trips."
+      },
+      {
+        "label": "Go to trip slide 3",
+        "kind": "button",
+        "selector": "div.flex.justify-center.mt-4.space-x-2 > button:nth-of-type(3)",
+        "description": "Navigates to the third slide of upcoming trips."
+      },
+      {
+        "label": "Go to trip slide 4",
+        "kind": "button",
+        "selector": "div.flex.justify-center.mt-4.space-x-2 > button:nth-of-type(4)",
+        "description": "Navigates to the fourth slide of upcoming trips."
+      },
+      {
+        "label": "View Opportunity (Dharamshala)",
+        "kind": "button",
+        "selector": "div.grid.grid-cols-1.sm\\:grid-cols-2.lg\\:grid-cols-3.gap-8 > div:nth-of-type(1) button",
+        "description": "Views details for the Dharamshala volunteer opportunity."
+      },
+      {
+        "label": "View Opportunity (Leh)",
+        "kind": "button",
+        "selector": "div.grid.grid-cols-1.sm\\:grid-cols-2.lg\\:grid-cols-3.gap-8 > div:nth-of-type(2) button",
+        "description": "Views details for the Leh volunteer opportunity."
+      },
+      {
+        "label": "View Opportunity (McLeodganj)",
+        "kind": "button",
+        "selector": "div.grid.grid-cols-1.sm\\:grid-cols-2.lg\\:grid-cols-3.gap-8 > div:nth-of-type(3) button",
+        "description": "Views details for the McLeodganj volunteer opportunity."
+      },
+      {
+        "label": "Know more about volunteer travel !",
+        "kind": "button",
+        "selector": "div.mt-8.flex.justify-center.gap-4.flex-wrap > button:nth-of-type(1)",
+        "description": "Provides more information about volunteer travel programs."
+      },
+      {
+        "label": "Explore All Volunteer Opportunities",
+        "kind": "button",
+        "selector": "div.mt-8.flex.justify-center.gap-4.flex-wrap > button:nth-of-type(2)",
+        "description": "Navigates to a page listing all volunteer opportunities."
+      },
+      {
+        "label": "Explore More (Services)",
+        "kind": "button",
+        "selector": "div.sm\\:w-\\[60vw\\] > div:last-of-type > button",
+        "description": "Explores more details about the services offered."
+      },
+      {
+        "label": "Previous Image",
+        "kind": "button",
+        "selector": "div.flex.flex-col.items-center.mt-8.w-full.relative > button:nth-of-type(1)",
+        "description": "Navigates to the previous image in the 'What you can't do at your home' carousel."
+      },
+      {
+        "label": "Next Image",
+        "kind": "button",
+        "selector": "div.flex.flex-col.items-center.mt-8.w-full.relative > button:nth-of-type(2)",
+        "description": "Navigates to the next image in the 'What you can't do at your home' carousel."
+      },
+      {
+        "label": "Go to image slide 1",
+        "kind": "button",
+        "selector": "div.flex.mt-\\[1rem\\].justify-center.space-x-\\[0.5rem\\] > button:nth-of-type(1)",
+        "description": "Navigates to the first image in the 'What you can't do at your home' carousel."
+      },
+      {
+        "label": "Go to image slide 2",
+        "kind": "button",
+        "selector": "div.flex.mt-\\[1rem\\].justify-center.space-x-\\[0.5rem\\] > button:nth-of-type(2)",
+        "description": "Navigates to the second image in the 'What you can't do at your home' carousel."
+      },
+      {
+        "label": "Go to image slide 3",
+        "kind": "button",
+        "selector": "div.flex.mt-\\[1rem\\].justify-center.space-x-\\[0.5rem\\] > button:nth-of-type(3)",
+        "description": "Navigates to the third image in the 'What you can't do at your home' carousel."
+      },
+      {
+        "label": "Go to image slide 4",
+        "kind": "button",
+        "selector": "div.flex.mt-\\[1rem\\].justify-center.space-x-\\[0.5rem\\] > button:nth-of-type(4)",
+        "description": "Navigates to the fourth image in the 'What you can't do at your home' carousel."
+      },
+      {
+        "label": "Visit our previous moments",
+        "kind": "button",
+        "selector": "div.mt-\\[1rem\\] > button",
+        "description": "Navigates to a page showcasing past customer moments/testimonials."
+      },
+      {
+        "label": "Previous blog post",
+        "kind": "button",
+        "selector": "div.pt-\\[3\\.13rem\\]:last-of-type div.mt-\\[2rem\\].relative > button:nth-of-type(1)",
+        "description": "Navigates to the previous blog post in the 'Revolutionsing The Ways We Travel' carousel."
+      },
+      {
+        "label": "Next blog post",
+        "kind": "button",
+        "selector": "div.pt-\\[3\\.13rem\\]:last-of-type div.mt-\\[2rem\\].relative > button:nth-of-type(2)",
+        "description": "Navigates to the next blog post in the 'Revolutionsing The Ways We Travel' carousel."
+      },
+      {
+        "label": "Go to blog slide 1",
+        "kind": "button",
+        "selector": "div.pt-\\[3\\.13rem\\]:last-of-type div.flex.justify-center.mt-4.space-x-2 > button:nth-of-type(1)",
+        "description": "Navigates to the first slide of blog posts."
+      },
+      {
+        "label": "Go to blog slide 2",
+        "kind": "button",
+        "selector": "div.pt-\\[3\\.13rem\\]:last-of-type div.flex.justify-center.mt-4.space-x-2 > button:nth-of-type(2)",
+        "description": "Navigates to the second slide of blog posts."
+      },
+      {
+        "label": "Go to blog slide 3",
+        "kind": "button",
+        "selector": "div.pt-\\[3\\.13rem\\]:last-of-type div.flex.justify-center.mt-4.space-x-2 > button:nth-of-type(3)",
+        "description": "Navigates to the third slide of blog posts."
+      },
+      {
+        "label": "Go to blog slide 4",
+        "kind": "button",
+        "selector": "div.pt-\\[3\\.13rem\\]:last-of-type div.flex.justify-center.mt-4.space-x-2 > button:nth-of-type(4)",
+        "description": "Navigates to the fourth slide of blog posts."
+      }
+    ],
+    "test_cases": [
+      {
+        "title": "Open mobile menu",
+        "steps": [
+          "Click the 'Open mobile menu' button."
+        ],
+        "expected": "The mobile navigation menu is displayed."
+      },
+      {
+        "title": "Close mobile menu by clicking the button again",
+        "steps": [
+          "Click the 'Open mobile menu' button to open it.",
+          "Click the 'Open mobile menu' button again."
+        ],
+        "expected": "The mobile navigation menu is hidden."
+      },
+      {
+        "title": "Open user profile",
+        "steps": [
+          "Click the 'tushar (User Profile)' button."
+        ],
+        "expected": "The user profile or account options menu is displayed."
+      },
+      {
+        "title": "Click user profile button when already open",
+        "steps": [
+          "Click the 'tushar (User Profile)' button to open it.",
+          "Click the 'tushar (User Profile)' button again."
+        ],
+        "expected": "The user profile or account options menu is hidden or remains open with no change."
+      },
+      {
+        "title": "Navigate to previous trip in carousel",
+        "steps": [
+          "Ensure the carousel is not on the first trip slide.",
+          "Click the 'Previous trip' button."
+        ],
+        "expected": "The carousel navigates to the preceding trip slide."
+      },
+      {
+        "title": "Attempt to navigate previous from the first trip",
+        "steps": [
+          "Navigate to the first trip slide in the 'Upcoming memories' carousel.",
+          "Click the 'Previous trip' button."
+        ],
+        "expected": "The carousel remains on the first trip slide, or loops to the last trip slide."
+      },
+      {
+        "title": "Navigate to next trip in carousel",
+        "steps": [
+          "Ensure the carousel is not on the last trip slide.",
+          "Click the 'Next trip' button."
+        ],
+        "expected": "The carousel navigates to the subsequent trip slide."
+      },
+      {
+        "title": "Attempt to navigate next from the last trip",
+        "steps": [
+          "Navigate to the last trip slide in the 'Upcoming memories' carousel.",
+          "Click the 'Next trip' button."
+        ],
+        "expected": "The carousel remains on the last trip slide, or loops to the first trip slide."
+      },
+      {
+        "title": "Initiate booking for Manali and Kasol",
+        "steps": [
+          "Click the 'Book Now (Manali and Kasol)' button."
+        ],
+        "expected": "The booking process for the Manali and Kasol trip is initiated, typically by navigating to a booking form or details page."
+      },
+      {
+        "title": "Initiate booking for Shimla and Kufri",
+        "steps": [
+          "Click the 'Book Now (Shimla and Kufri)' button."
+        ],
+        "expected": "The booking process for the Shimla and Kufri trip is initiated, typically by navigating to a booking form or details page."
+      },
+      {
+        "title": "Initiate booking for McLeodganj",
+        "steps": [
+          "Click the 'Book Now (McLeodganj)' button."
+        ],
+        "expected": "The booking process for the McLeodganj trip is initiated, typically by navigating to a booking form or details page."
+      },
+      {
+        "title": "Initiate booking for Dalhousie",
+        "steps": [
+          "Click the 'Book Now (Dalhousie)' button."
+        ],
+        "expected": "The booking process for the Dalhousie trip is initiated, typically by navigating to a booking form or details page."
+      },
+      {
+        "title": "Go to trip slide 1",
+        "steps": [
+          "Ensure the 'Upcoming memories' carousel is not on slide 1.",
+          "Click the 'Go to trip slide 1' button."
+        ],
+        "expected": "The 'Upcoming memories' carousel navigates directly to the first trip slide."
+      },
+      {
+        "title": "Click 'Go to trip slide 1' when already on slide 1",
+        "steps": [
+          "Ensure the 'Upcoming memories' carousel is on slide 1.",
+          "Click the 'Go to trip slide 1' button."
+        ],
+        "expected": "The 'Upcoming memories' carousel remains on the first trip slide without any visible change or reload."
+      },
+      {
+        "title": "Go to trip slide 2",
+        "steps": [
+          "Ensure the 'Upcoming memories' carousel is not on slide 2.",
+          "Click the 'Go to trip slide 2' button."
+        ],
+        "expected": "The 'Upcoming memories' carousel navigates directly to the second trip slide."
+      },
+      {
+        "title": "Click 'Go to trip slide 2' when already on slide 2",
+        "steps": [
+          "Ensure the 'Upcoming memories' carousel is on slide 2.",
+          "Click the 'Go to trip slide 2' button."
+        ],
+        "expected": "The 'Upcoming memories' carousel remains on the second trip slide without any visible change or reload."
+      },
+      {
+        "title": "Go to trip slide 3",
+        "steps": [
+          "Ensure the 'Upcoming memories' carousel is not on slide 3.",
+          "Click the 'Go to trip slide 3' button."
+        ],
+        "expected": "The 'Upcoming memories' carousel navigates directly to the third trip slide."
+      },
+      {
+        "title": "Click 'Go to trip slide 3' when already on slide 3",
+        "steps": [
+          "Ensure the 'Upcoming memories' carousel is on slide 3.",
+          "Click the 'Go to trip slide 3' button."
+        ],
+        "expected": "The 'Upcoming memories' carousel remains on the third trip slide without any visible change or reload."
+      },
+      {
+        "title": "Go to trip slide 4",
+        "steps": [
+          "Ensure the 'Upcoming memories' carousel is not on slide 4.",
+          "Click the 'Go to trip slide 4' button."
+        ],
+        "expected": "The 'Upcoming memories' carousel navigates directly to the fourth trip slide."
+      },
+      {
+        "title": "Click 'Go to trip slide 4' when already on slide 4",
+        "steps": [
+          "Ensure the 'Upcoming memories' carousel is on slide 4.",
+          "Click the 'Go to trip slide 4' button."
+        ],
+        "expected": "The 'Upcoming memories' carousel remains on the fourth trip slide without any visible change or reload."
+      },
+      {
+        "title": "View Dharamshala volunteer opportunity details",
+        "steps": [
+          "Click the 'View Opportunity (Dharamshala)' button."
+        ],
+        "expected": "The page navigates to the detailed view of the Dharamshala volunteer opportunity."
+      },
+      {
+        "title": "View Leh volunteer opportunity details",
+        "steps": [
+          "Click the 'View Opportunity (Leh)' button."
+        ],
+        "expected": "The page navigates to the detailed view of the Leh volunteer opportunity."
+      },
+      {
+        "title": "View McLeodganj volunteer opportunity details",
+        "steps": [
+          "Click the 'View Opportunity (McLeodganj)' button."
+        ],
+        "expected": "The page navigates to the detailed view of the McLeodganj volunteer opportunity."
+      },
+      {
+        "title": "Access more information about volunteer travel",
+        "steps": [
+          "Click the 'Know more about volunteer travel !' button."
+        ],
+        "expected": "A section or page providing more information about volunteer travel programs is displayed."
+      },
+      {
+        "title": "Explore all volunteer opportunities",
+        "steps": [
+          "Click the 'Explore All Volunteer Opportunities' button."
+        ],
+        "expected": "The page navigates to a dedicated page listing all available volunteer opportunities."
+      },
+      {
+        "title": "Explore more about services",
+        "steps": [
+          "Click the 'Explore More (Services)' button."
+        ],
+        "expected": "The page navigates to a section or page detailing more about the services offered."
+      },
+      {
+        "title": "Navigate to previous image in carousel",
+        "steps": [
+          "Ensure the 'What you can't do at your home' carousel is not on the first image slide.",
+          "Click the 'Previous Image' button."
+        ],
+        "expected": "The carousel navigates to the preceding image slide."
+      },
+      {
+        "title": "Attempt to navigate previous from the first image",
+        "steps": [
+          "Navigate to the first image slide in the 'What you can't do at your home' carousel.",
+          "Click the 'Previous Image' button."
+        ],
+        "expected": "The carousel remains on the first image slide, or loops to the last image slide."
+      },
+      {
+        "title": "Navigate to next image in carousel",
+        "steps": [
+          "Ensure the 'What you can't do at your home' carousel is not on the last image slide.",
+          "Click the 'Next Image' button."
+        ],
+        "expected": "The carousel navigates to the subsequent image slide."
+      },
+      {
+        "title": "Attempt to navigate next from the last image",
+        "steps": [
+          "Navigate to the last image slide in the 'What you can't do at your home' carousel.",
+          "Click the 'Next Image' button."
+        ],
+        "expected": "The carousel remains on the last image slide, or loops to the first image slide."
+      },
+      {
+        "title": "Go to image slide 1",
+        "steps": [
+          "Ensure the 'What you can't do at your home' carousel is not on image slide 1.",
+          "Click the 'Go to image slide 1' button."
+        ],
+        "expected": "The 'What you can't do at your home' carousel navigates directly to the first image slide."
+      },
+      {
+        "title": "Click 'Go to image slide 1' when already on slide 1",
+        "steps": [
+          "Ensure the 'What you can't do at your home' carousel is on image slide 1.",
+          "Click the 'Go to image slide 1' button."
+        ],
+        "expected": "The 'What you can't do at your home' carousel remains on the first image slide without any visible change or reload."
+      },
+      {
+        "title": "Go to image slide 2",
+        "steps": [
+          "Ensure the 'What you can't do at your home' carousel is not on image slide 2.",
+          "Click the 'Go to image slide 2' button."
+        ],
+        "expected": "The 'What you can't do at your home' carousel navigates directly to the second image slide."
+      },
+      {
+        "title": "Click 'Go to image slide 2' when already on slide 2",
+        "steps": [
+          "Ensure the 'What you can't do at your home' carousel is on image slide 2.",
+          "Click the 'Go to image slide 2' button."
+        ],
+        "expected": "The 'What you can't do at your home' carousel remains on the second image slide without any visible change or reload."
+      },
+      {
+        "title": "Go to image slide 3",
+        "steps": [
+          "Ensure the 'What you can't do at your home' carousel is not on image slide 3.",
+          "Click the 'Go to image slide 3' button."
+        ],
+        "expected": "The 'What you can't do at your home' carousel navigates directly to the third image slide."
+      },
+      {
+        "title": "Click 'Go to image slide 3' when already on slide 3",
+        "steps": [
+          "Ensure the 'What you can't do at your home' carousel is on image slide 3.",
+          "Click the 'Go to image slide 3' button."
+        ],
+        "expected": "The 'What you can't do at your home' carousel remains on the third image slide without any visible change or reload."
+      },
+      {
+        "title": "Go to image slide 4",
+        "steps": [
+          "Ensure the 'What you can't do at your home' carousel is not on image slide 4.",
+          "Click the 'Go to image slide 4' button."
+        ],
+        "expected": "The 'What you can't do at your home' carousel navigates directly to the fourth image slide."
+      },
+      {
+        "title": "Click 'Go to image slide 4' when already on slide 4",
+        "steps": [
+          "Ensure the 'What you can't do at your home' carousel is on image slide 4.",
+          "Click the 'Go to image slide 4' button."
+        ],
+        "expected": "The 'What you can't do at your home' carousel remains on the fourth image slide without any visible change or reload."
+      },
+      {
+        "title": "Visit previous moments page",
+        "steps": [
+          "Click the 'Visit our previous moments' button."
+        ],
+        "expected": "The page navigates to a section or page showcasing past customer moments/testimonials."
+      },
+      {
+        "title": "Navigate to previous blog post in carousel",
+        "steps": [
+          "Ensure the 'Revolutionsing The Ways We Travel' carousel is not on the first blog post slide.",
+          "Click the 'Previous blog post' button."
+        ],
+        "expected": "The carousel navigates to the preceding blog post slide."
+      },
+      {
+        "title": "Attempt to navigate previous from the first blog post",
+        "steps": [
+          "Navigate to the first blog post slide in the 'Revolutionsing The Ways We Travel' carousel.",
+          "Click the 'Previous blog post' button."
+        ],
+        "expected": "The carousel remains on the first blog post slide, or loops to the last blog post slide."
+      },
+      {
+        "title": "Navigate to next blog post in carousel",
+        "steps": [
+          "Ensure the 'Revolutionsing The Ways We Travel' carousel is not on the last blog post slide.",
+          "Click the 'Next blog post' button."
+        ],
+        "expected": "The carousel navigates to the subsequent blog post slide."
+      },
+      {
+        "title": "Attempt to navigate next from the last blog post",
+        "steps": [
+          "Navigate to the last blog post slide in the 'Revolutionsing The Ways We Travel' carousel.",
+          "Click the 'Next blog post' button."
+        ],
+        "expected": "The carousel remains on the last blog post slide, or loops to the first blog post slide."
+      },
+      {
+        "title": "Go to blog slide 1",
+        "steps": [
+          "Ensure the 'Revolutionsing The Ways We Travel' carousel is not on blog slide 1.",
+          "Click the 'Go to blog slide 1' button."
+        ],
+        "expected": "The 'Revolutionsing The Ways We Travel' carousel navigates directly to the first blog slide."
+      },
+      {
+        "title": "Click 'Go to blog slide 1' when already on slide 1",
+        "steps": [
+          "Ensure the 'Revolutionsing The Ways We Travel' carousel is on blog slide 1.",
+          "Click the 'Go to blog slide 1' button."
+        ],
+        "expected": "The 'Revolutionsing The Ways We Travel' carousel remains on the first blog slide without any visible change or reload."
+      },
+      {
+        "title": "Go to blog slide 2",
+        "steps": [
+          "Ensure the 'Revolutionsing The Ways We Travel' carousel is not on blog slide 2.",
+          "Click the 'Go to blog slide 2' button."
+        ],
+        "expected": "The 'Revolutionsing The Ways We Travel' carousel navigates directly to the second blog slide."
+      },
+      {
+        "title": "Click 'Go to blog slide 2' when already on slide 2",
+        "steps": [
+          "Ensure the 'Revolutionsing The Ways We Travel' carousel is on blog slide 2.",
+          "Click the 'Go to blog slide 2' button."
+        ],
+        "expected": "The 'Revolutionsing The Ways We Travel' carousel remains on the second blog slide without any visible change or reload."
+      },
+      {
+        "title": "Go to blog slide 3",
+        "steps": [
+          "Ensure the 'Revolutionsing The Ways We Travel' carousel is not on blog slide 3.",
+          "Click the 'Go to blog slide 3' button."
+        ],
+        "expected": "The 'Revolutionsing The Ways We Travel' carousel navigates directly to the third blog slide."
+      },
+      {
+        "title": "Click 'Go to blog slide 3' when already on slide 3",
+        "steps": [
+          "Ensure the 'Revolutionsing The Ways We Travel' carousel is on blog slide 3.",
+          "Click the 'Go to blog slide 3' button."
+        ],
+        "expected": "The 'Revolutionsing The Ways We Travel' carousel remains on the third blog slide without any visible change or reload."
+      },
+      {
+        "title": "Go to blog slide 4",
+        "steps": [
+          "Ensure the 'Revolutionsing The Ways We Travel' carousel is not on blog slide 4.",
+          "Click the 'Go to blog slide 4' button."
+        ],
+        "expected": "The 'Revolutionsing The Ways We Travel' carousel navigates directly to the fourth blog slide."
+      },
+      {
+        "title": "Click 'Go to blog slide 4' when already on slide 4",
+        "steps": [
+          "Ensure the 'Revolutionsing The Ways We Travel' carousel is on blog slide 4.",
+          "Click the 'Go to blog slide 4' button."
+        ],
+        "expected": "The 'Revolutionsing The Ways We Travel' carousel remains on the fourth blog slide without any visible change or reload."
+      }
+    ]
+  }
+]

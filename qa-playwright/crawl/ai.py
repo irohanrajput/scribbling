@@ -117,6 +117,10 @@ class AIClient:
         system = (
             "You are a QA crawler analyzing a web page from its DOM. Return:\n"
             "- site_type and a one-line summary,\n"
+            "- is_loading: true if the page is still loading (mainly a spinner/"
+            "skeleton/'loading' placeholder, real content not rendered yet),\n"
+            "- is_login_page: true if THIS page is itself the login/auth screen "
+            "(credential fields present, or an email-first login step), else false,\n"
             "- login_link: the sign-in/login URL if one is present, else null,\n"
             "- links: navigation links, each flagged is_feature (true = a product "
             "feature worth QA testing; false = boilerplate like terms/privacy/careers),\n"

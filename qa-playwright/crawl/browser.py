@@ -19,10 +19,10 @@ log = get("browser")
 
 
 # Settle knobs
-_MIN_WAIT_MS = 1000    # floor: give JS time to fire its initial data fetch
-_QUIET_MS = 600        # DOM must be mutation-free this long to count as quiet
+_MIN_WAIT_MS = 1500    # floor: give JS time to fire its initial data fetch
+_QUIET_MS = 1200       # DOM must be mutation-free this long to count as quiet
 _POLL_MS = 200
-_MAX_WAIT_MS = 15000   # hard cap so a never-quiet page can't hang us
+_MAX_WAIT_MS = 20000   # hard cap so a never-quiet page can't hang us
 _NET_TYPES = ("xhr", "fetch")  # only these count; ignore ws/eventsource/img/etc.
 
 # Installs a MutationObserver (idempotent, re-installs after a full navigation
@@ -102,6 +102,16 @@ def load_page(page, url: str) -> str:
     dom = page.content()
     block(log, "captured DOM", dom)  # full DOM -> file, preview -> terminal
     return dom
+
+
+def has_password_field(page) -> bool:
+    """Deterministic 'is this a login page?' backstop: a password input exists.
+    Generic across stacks; complements the AI's is_login_page judgment (which
+    also catches email-first steps where no password field is shown yet)."""
+    try:
+        return page.locator("input[type=password]").count() > 0
+    except Exception:
+        return False
 
 
 def has_cache(path: str) -> bool:

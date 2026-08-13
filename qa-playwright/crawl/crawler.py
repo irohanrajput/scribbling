@@ -13,10 +13,36 @@ at max_links per page.
 from urllib.parse import urljoin, urlparse
 
 from ai import AIClient
-from browser import load_page
+from browser import load_page, wait_for_settled
 from logs import get
 
 log = get("crawler")
+
+
+def read_page(page, ai: AIClient, url: str, max_loading_retries: int = 3):
+    """Load a URL and return (dom, analysis), reliably.
+
+    Timing-based waits can snapshot a page mid-load (e.g. during the quiet gap
+    before a redirect fires), so we use the AI itself as the oracle: if it says
+    the page is still loading, wait and re-check. This rides out spinners,
+    delayed redirects and slow client renders generically — no markup guessing."""
+    dom = load_page(page, url)
+    analysis = ai.analyze_page(dom)
+
+    tries = 0
+    while analysis.is_loading and tries < max_loading_retries:
+        tries += 1
+        log.info("  AI says page still loading — waiting and re-checking (%d/%d)",
+                 tries, max_loading_retries)
+        page.wait_for_timeout(2000)   # give the app time to progress past loading
+        wait_for_settled(page)
+        dom = page.content()
+        analysis = ai.analyze_page(dom)
+
+    if analysis.is_loading:
+        log.warning("  page still reports loading after %d retries; proceeding anyway",
+                    max_loading_retries)
+    return dom, analysis
 
 
 def _in_scope(start: str, candidate: str) -> bool:
@@ -54,14 +80,12 @@ def crawl(context, ai: AIClient, start_url: str,
                  depth, url, len(queue), len(visited))
         page = context.new_page()
         try:
-            dom = load_page(page, url)
+            dom, analysis = read_page(page, ai, url)
         except Exception as e:
             log.warning("  skip %s: %s", url, e)
             page.close()
             continue
 
-        log.info("  DOM=%d chars | analyzing page with Gemini", len(dom))
-        analysis = ai.analyze_page(dom)
         log.info("  found %d links, %d actionables (site_type=%s)",
                  len(analysis.links), len(analysis.actionables), analysis.site_type)
 
